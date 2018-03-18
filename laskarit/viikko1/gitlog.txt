@@ -1,0 +1,209 @@
+git log --stat | cat
+commit 73ee2a2d0228f6fa931b2d57030d772eecc9c05b
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sun Mar 18 20:33:32 2018 +0200
+
+    tiedostoja lisätty
+
+ file1 | 0
+ file2 | 0
+ file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit da4d4ff79425f814d7b13747e9990c7880cda52b
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 20:14:58 2018 +0200
+
+    tiedostoja muutettu
+
+ eka.txt    | 3 ++-
+ kolmas.txt | 3 ++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+commit c934190ae34252fe65a4adab03322c4143990f52
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 20:12:48 2018 +0200
+
+    tiedosto ekaksi
+
+ eka.txt      | 6 ++++++
+ tiedosto.txt | 6 ------
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+commit e0b94ac033da7ef7e8c15014a46da809d16ed275
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 20:11:54 2018 +0200
+
+    toinen poistettu
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 7b001a4205c905ff0e05160db84cc0de1213d352
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 20:11:00 2018 +0200
+
+    tiedostoa muutettu taas
+
+ tiedosto.txt | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+commit e44f15cea9ee9d7eb242965cfd7cfd1b71dde1ff
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 20:10:20 2018 +0200
+
+    tiedostoa muutettu
+
+ tiedosto.txt | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit 4ddcfc767d8c41114b7d87c3774eeceb9a9bc661
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 19:15:51 2018 +0200
+
+    jokin tiedosto ja kansio lisätty
+
+ stuff/jokin.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 00ae5499eb5f7e373d03e549a24ebb517fe23477
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 19:14:30 2018 +0200
+
+    toinen ja kolmas muutettu
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 11a4b167c7c2d3378ceb40ac969814dd3e2ff3bf
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 19:13:25 2018 +0200
+
+    kolmas lisätty
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 90fb0d1af1717187dcf085529a0661a8db385fd6
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 19:10:39 2018 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit f5384f5f1e5ceafd8e210fd837076ab72a611d3c
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 19:08:58 2018 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)git log --stat | cat
+commit 73ee2a2d0228f6fa931b2d57030d772eecc9c05b
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sun Mar 18 20:33:32 2018 +0200
+
+    tiedostoja lisätty
+
+ file1 | 0
+ file2 | 0
+ file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit da4d4ff79425f814d7b13747e9990c7880cda52b
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 20:14:58 2018 +0200
+
+    tiedostoja muutettu
+
+ eka.txt    | 3 ++-
+ kolmas.txt | 3 ++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+commit c934190ae34252fe65a4adab03322c4143990f52
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 20:12:48 2018 +0200
+
+    tiedosto ekaksi
+
+ eka.txt      | 6 ++++++
+ tiedosto.txt | 6 ------
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+commit e0b94ac033da7ef7e8c15014a46da809d16ed275
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 20:11:54 2018 +0200
+
+    toinen poistettu
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 7b001a4205c905ff0e05160db84cc0de1213d352
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 20:11:00 2018 +0200
+
+    tiedostoa muutettu taas
+
+ tiedosto.txt | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+commit e44f15cea9ee9d7eb242965cfd7cfd1b71dde1ff
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 20:10:20 2018 +0200
+
+    tiedostoa muutettu
+
+ tiedosto.txt | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit 4ddcfc767d8c41114b7d87c3774eeceb9a9bc661
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 19:15:51 2018 +0200
+
+    jokin tiedosto ja kansio lisätty
+
+ stuff/jokin.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 00ae5499eb5f7e373d03e549a24ebb517fe23477
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 19:14:30 2018 +0200
+
+    toinen ja kolmas muutettu
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 11a4b167c7c2d3378ceb40ac969814dd3e2ff3bf
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 19:13:25 2018 +0200
+
+    kolmas lisätty
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 90fb0d1af1717187dcf085529a0661a8db385fd6
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 19:10:39 2018 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit f5384f5f1e5ceafd8e210fd837076ab72a611d3c
+Author: Juho Kesälä <elukka.elukka@gmail.com>
+Date:   Sat Mar 17 19:08:58 2018 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
