@@ -60,5 +60,10 @@ public class MaksukorttiTest {
     public void palauttaaFalseJosRahatEiRiita() {
         assertFalse(kortti.otaRahaa(13));
     }
+    
+    @Test
+    public void saldonPalautusOnOikein() {
+        assertEquals(10, kortti.saldo());
+    }
 
 }
