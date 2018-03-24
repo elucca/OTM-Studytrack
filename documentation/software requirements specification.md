@@ -16,7 +16,7 @@ The purpose of the application is to enable the user to track the time they spen
 - The application uses a graphical interface to present to the user their active courses, the task types belonging to each of them, and the time spent on them so far.
   - The graphical interface is also used to input courses, task types, and time spent on them.
 
-Further goals
+## Further goals
 - Grouping of courses by subject
 - Statistics functionality: Existing user data is used to generate reports, for example "Average weekly time spent on course of subject 'Mathematics'", or "Average weekly time spent on task type 'Moodle' on course 'Tira'".
 - Planning functionality: A calendar view where the user can schedule tasks. Data from the statistics functionality is used to suggest how much time a task of a given type has historically needed.
