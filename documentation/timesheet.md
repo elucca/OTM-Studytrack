@@ -2,3 +2,4 @@
 | ------------- |:-------------:| :------------------------------------------------------------------|
 | 24.3.2018     | 1h 24m        |  Wrote initial version of the software requirements specification  |
 | 08.4.2018     | 2h 03m        |  Made plans for initial structure and functionality of the program |
+| 08.4.2018     | 5h 20m        |  Began programming initial iteration of the program                |
