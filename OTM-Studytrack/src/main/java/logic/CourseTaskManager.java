@@ -32,5 +32,9 @@ public class CourseTaskManager {
     public void addTaskType(String name, String courseName) {
         taskTypeDao.addTaskType(new TaskType(name, new Course(courseName)));
     }
+    
+    public TaskType getTaskType(String task, String course) {
+        return taskTypeDao.findTaskType(task, course);
+    }
 
 }

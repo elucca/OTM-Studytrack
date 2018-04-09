@@ -34,4 +34,27 @@ public class TaskType {
         return belongsToCourse;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TaskType other = (TaskType) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.belongsToCourse, other.belongsToCourse)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+
 }
