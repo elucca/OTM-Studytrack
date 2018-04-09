@@ -55,6 +55,7 @@ public class TextUI {
             }
 
             if (input == 4) {
+                //DEBUG
                 System.out.print("Please input the name of the course the task belongs to: ");
                 String courseName = reader.nextLine();
                 System.out.print("Please input the name of the task the entry is related to: ");
@@ -89,8 +90,8 @@ public class TextUI {
 
             if (input == 6) {
                 List<Course> courses = taskService.getCourses();
+                System.out.println("Courses:");
                 for (Course course : courses) {
-                    System.out.println("Courses:");
                     System.out.println("  " + course.getName());
                 }
                 System.out.println("");
