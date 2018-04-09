@@ -2,6 +2,7 @@ package otmstudytrack.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import otmstudytrack.data.Course;
 import otmstudytrack.data.TaskEntry;
 import otmstudytrack.data.TaskType;
 
@@ -16,6 +17,17 @@ public class FakeTaskEntryDao implements TaskEntryDao {
     @Override
     public void addTaskEntry(TaskEntry taskEntry) {
         taskEntries.add(taskEntry);
+    }
+
+    @Override
+    public TaskEntry findTaskEntry(TaskType taskType, int courseWeek) {
+        for (TaskEntry taskEntry : taskEntries) {
+            if (taskEntry.getTaskType().equals(taskType)
+                    && taskEntry.getCourseWeek() == courseWeek) {
+                return taskEntry;
+            }
+        }
+        return null;
     }
 
     @Override

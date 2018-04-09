@@ -2,6 +2,7 @@ package otmstudytrack.data;
 
 import java.time.Duration;
 import java.util.Date;
+import java.util.Objects;
 
 public class TaskEntry {
     
@@ -35,6 +36,29 @@ public class TaskEntry {
     public TaskType getTaskType() {
         return taskType;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TaskEntry other = (TaskEntry) obj;
+        if (this.courseWeek != other.courseWeek) {
+            return false;
+        }
+        if (!Objects.equals(this.taskType, other.taskType)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
     
     
 }
