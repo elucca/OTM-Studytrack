@@ -3,6 +3,7 @@ package logic;
 import java.time.Duration;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import otmstudytrack.dao.CourseDao;
 import otmstudytrack.dao.TaskEntryDao;
 import otmstudytrack.dao.TaskTypeDao;
@@ -13,11 +14,11 @@ import otmstudytrack.data.TaskType;
 public class TaskService {
 
     private CourseTaskManager courseTaskManager;
-    private TaskEntryDao taskEntryDao;
+    private EntryManager entryManager;
 
-    public TaskService(CourseTaskManager courseTaskManager, TaskEntryDao taskEntryDao) {
+    public TaskService(CourseTaskManager courseTaskManager, EntryManager typeEntryManager) {
         this.courseTaskManager = courseTaskManager;
-        this.taskEntryDao = taskEntryDao;
+        this.entryManager = typeEntryManager;
     }
 
     public boolean addCourse(String name) {
@@ -50,14 +51,14 @@ public class TaskService {
         }
 
         Date date = new Date();
-        taskEntryDao.addTaskEntry(new TaskEntry(date, courseWeek, foundTaskType));
+        entryManager.addTaskEntry(date, courseWeek, foundTaskType);
         return true;
     }
 
     public boolean addTimeToTaskEntry(String task, String course, int courseWeek, int hours, int minutes) {
         //Returns false if task entry is not found
         TaskType foundTaskType = courseTaskManager.getTaskType(task, course);
-        TaskEntry foundTaskEntry = taskEntryDao.findTaskEntry(foundTaskType, courseWeek);
+        TaskEntry foundTaskEntry = entryManager.getTaskEntry(foundTaskType, courseWeek);
 
         if (foundTaskType == null || foundTaskEntry == null) {
             return false;
@@ -70,6 +71,32 @@ public class TaskService {
         foundTaskEntry.addTimeSpent(fullDuration);
 
         return true;
+    }
+    
+    public List<Course> getCourses() {
+        return courseTaskManager.getCourses();
+    }
+    
+    public Duration getTimeSpentOnCourse(String course) {
+        List<TaskType> foundTasks = courseTaskManager.getTaskTypesOfCourse(course);
+        Duration timeSpent = Duration.ZERO;
+        
+        for (TaskType task : foundTasks) {
+            List<TaskEntry> entries = entryManager.getEntriesOfTaskType(task.getName(), course);
+            for (TaskEntry entry : entries) {
+                timeSpent.plus(entry.getTimeSpent());
+            }
+        }
+        
+        return timeSpent;
+    }
+    
+    public List<TaskType> getTaskTypesOfCourse(String name) {
+        return courseTaskManager.getTaskTypesOfCourse(name);
+    }
+    
+    public List<TaskEntry> getEntriesOfTaskType(String task, String course) {
+        return entryManager.getEntriesOfTaskType(task, course);
     }
 
 }

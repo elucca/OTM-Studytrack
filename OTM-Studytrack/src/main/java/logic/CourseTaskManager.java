@@ -24,9 +24,18 @@ public class CourseTaskManager {
     public Course getCourse(String name) {
         //Need to handle cases where these are not found
         Course foundCourse = courseDao.findCourse(name);
+        
+        if (foundCourse == null) {
+            return null;
+        }
+        
         List<TaskType> foundTasks = taskTypeDao.findTaskTypesOfACourse(foundCourse);
         foundCourse.addTaskTypes(foundTasks);
         return foundCourse;
+    }
+    
+    public List<Course> getCourses() {
+        return courseDao.findAllCourses();
     }
     
     public void addTaskType(String name, String courseName) {
@@ -35,6 +44,10 @@ public class CourseTaskManager {
     
     public TaskType getTaskType(String task, String course) {
         return taskTypeDao.findTaskType(task, course);
+    }
+    
+    public List<TaskType> getTaskTypesOfCourse(String course) {
+        return taskTypeDao.findTaskTypesOfACourse(new Course(course));
     }
 
 }
