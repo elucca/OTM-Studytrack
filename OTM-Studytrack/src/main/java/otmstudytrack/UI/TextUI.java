@@ -55,7 +55,6 @@ public class TextUI {
             }
 
             if (input == 4) {
-                //DEBUG
                 System.out.print("Please input the name of the course the task belongs to: ");
                 String courseName = reader.nextLine();
                 System.out.print("Please input the name of the task the entry is related to: ");
@@ -126,6 +125,7 @@ public class TextUI {
             }
 
             if (input == 9) {
+                //Doesn't work, bug most likely elsewhere, will get caught in testing
                 System.out.println("Please input the name of the course: ");
                 String course = reader.nextLine();
 

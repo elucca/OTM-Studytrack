@@ -10,7 +10,7 @@ public interface TaskTypeDao {
     
     public void addTaskType(List<TaskType> taskTypes);
     
-    public TaskType findTaskType(String type, String course);
+    public TaskType findTaskType(TaskType taskType);
     
     public List<TaskType> findTasksOfAType(String type);
     

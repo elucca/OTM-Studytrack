@@ -28,7 +28,7 @@ public class EntryManager {
     }
 
     public List<TaskEntry> getEntriesOfTaskType(String task, String course) {
-        TaskType foundTask = taskTypeDao.findTaskType(task, course);
+        TaskType foundTask = taskTypeDao.findTaskType(new TaskType(task, new Course(course)));
         List<TaskEntry> foundEntries = taskEntryDao.findEntriesOfAType(foundTask);
         return foundEntries;
     }

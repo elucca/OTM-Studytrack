@@ -24,12 +24,13 @@ public class FakeTaskTypeDao implements TaskTypeDao {
     }
 
     @Override
-    public TaskType findTaskType(String type, String course) {
-        for (TaskType taskType : taskTypes) {
-            if (taskType.getName().equals(type) && taskType.getBelongsToCourse().equals(course)) {
-                return taskType;
+    public TaskType findTaskType(TaskType taskType) {
+        for (TaskType task : taskTypes) {
+            if (task.equals(taskType)) {
+                return task;
             }
         }
+        
         return null;
     }
 

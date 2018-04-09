@@ -46,8 +46,6 @@ public class TaskService {
         Course foundCourse = courseTaskManager.getCourse(course);
         TaskType foundTaskType = courseTaskManager.getTaskType(task, course);
 
-        System.out.println(foundCourse == null);
-        System.out.println(foundTaskType == null);
         if (foundCourse == null || foundTaskType == null) {
             return false;
         }
