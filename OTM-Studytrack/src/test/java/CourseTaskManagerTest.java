@@ -1,12 +1,12 @@
-import logic.CourseTaskManager;
+import domain.CourseTaskManager;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import otmstudytrack.dao.FakeCourseDao;
-import otmstudytrack.dao.FakeTaskTypeDao;
+import otmstudytrack.data.dao.FakeCourseDao;
+import otmstudytrack.data.dao.FakeTaskTypeDao;
 import otmstudytrack.data.Course;
 import otmstudytrack.data.TaskType;
 

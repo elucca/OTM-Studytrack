@@ -2,7 +2,7 @@ package otmstudytrack.UI;
 
 import java.util.List;
 import java.util.Scanner;
-import logic.TaskService;
+import otmstudytrack.domain.StudytrackService;
 import otmstudytrack.data.Course;
 import otmstudytrack.data.TaskEntry;
 import otmstudytrack.data.TaskType;
@@ -10,9 +10,9 @@ import otmstudytrack.data.TaskType;
 public class TextUI {
 
     private Scanner reader;
-    private TaskService taskService;
+    private StudytrackService taskService;
 
-    public TextUI(Scanner reader, TaskService taskService) {
+    public TextUI(Scanner reader, StudytrackService taskService) {
         this.reader = reader;
         this.taskService = taskService;
     }
@@ -62,32 +62,17 @@ public class TextUI {
                 System.out.print("Please input the course week the entry is related to: ");
                 int courseWeek = Integer.parseInt(reader.nextLine());
 
-                if (taskService.addTaskEntry(courseWeek, taskName, courseName) == false) {
-                    System.out.println("Course or task not found: Entry not added.");
-                }
-
-                System.out.println("");
-            }
-
-            if (input == 5) {
-                System.out.print("Please input the name of the course you worked on: ");
-                String courseName = reader.nextLine();
-
-                System.out.print("Please input the name of the task you worked on: ");
-                String taskName = reader.nextLine();
-
-                System.out.print("Please input the course week you worked on: ");
-                int courseWeek = Integer.parseInt(reader.nextLine());
-
                 System.out.print("Please specify hours spent: ");
                 int hours = Integer.parseInt(reader.nextLine());
                 System.out.print("Please specify minutes spent: ");
                 int minutes = Integer.parseInt(reader.nextLine());
 
-                taskService.addTimeToTaskEntry(taskName, courseName, courseWeek, hours, minutes);
+                taskService.addTaskEntry(courseWeek, taskName, courseName, hours, minutes);
+
+                System.out.println("");
             }
 
-            if (input == 6) {
+            if (input == 5) {
                 List<Course> courses = taskService.getCourses();
                 System.out.println("Courses:");
                 for (Course course : courses) {
@@ -96,7 +81,7 @@ public class TextUI {
                 System.out.println("");
             }
 
-            if (input == 7) {
+            if (input == 6) {
                 //Should probably display time spent on each one to be actually useful
                 System.out.print("Please input the name of the course to list its tasks: ");
                 String course = reader.nextLine();
@@ -107,7 +92,7 @@ public class TextUI {
                 System.out.println("");
             }
 
-            if (input == 8) {
+            if (input == 7) {
                 //Printing the time spent duration is currently un-good, prints seconds
                 //Replace it with something better to print hours and minutes
                 //Parsing that possibly belongs to program logic and not UI
@@ -124,7 +109,7 @@ public class TextUI {
                 System.out.println("");
             }
 
-            if (input == 9) {
+            if (input == 8) {
                 //Doesn't work, bug most likely elsewhere, will get caught in testing
                 System.out.println("Please input the name of the course: ");
                 String course = reader.nextLine();
@@ -133,7 +118,7 @@ public class TextUI {
                 System.out.println("");
             }
 
-            if (input == 10) {
+            if (input == 9) {
                 break;
             }
         }
@@ -154,20 +139,19 @@ public class TextUI {
         System.out.println("  Input data:");
         System.out.println("    2. Add a new course");
         System.out.println("    3. Add a new task type to a course");
-        System.out.println("    4. Add new time-spent entry");
-        System.out.println("    5. Add time spent to an entry");
+        System.out.println("    4. Add a new entry for a task");
 
         System.out.println("");
 
         System.out.println("  Display data:");
-        System.out.println("    6. List courses");
-        System.out.println("    7. List task types of a course");
-        System.out.println("    8. List the entries of a task");
-        System.out.println("    9. Display time spent on a course");
+        System.out.println("    5. List courses");
+        System.out.println("    6. List task types of a course");
+        System.out.println("    7. List the entries of a task");
+        System.out.println("    8. Display time spent on a course");
 
         System.out.println("");
 
-        System.out.println("  10. Exit program");
+        System.out.println("  9. Exit program");
 
         System.out.println("");
 

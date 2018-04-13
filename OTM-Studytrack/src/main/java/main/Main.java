@@ -1,31 +1,27 @@
 package main;
 
 import java.util.Scanner;
-import logic.CourseTaskManager;
-import logic.EntryManager;
-import logic.TaskService;
+import otmstudytrack.domain.StudytrackService;
 import otmstudytrack.UI.TextUI;
-import otmstudytrack.dao.CourseDao;
-import otmstudytrack.dao.FakeCourseDao;
-import otmstudytrack.dao.FakeTaskEntryDao;
-import otmstudytrack.dao.FakeTaskTypeDao;
-import otmstudytrack.dao.TaskEntryDao;
-import otmstudytrack.dao.TaskTypeDao;
+import otmstudytrack.data.dao.CourseDao;
+import otmstudytrack.data.dao.FakeCourseDao;
+import otmstudytrack.data.dao.FakeTaskEntryDao;
+import otmstudytrack.data.dao.FakeTaskTypeDao;
+import otmstudytrack.data.dao.TaskEntryDao;
+import otmstudytrack.data.dao.TaskTypeDao;
 
 public class Main {
     
     public static void main(String[] args) {
         //Initializes the program
         
-        //Init fake daos
+        //Init daos
         TaskEntryDao entryDao = new FakeTaskEntryDao();
-        TaskTypeDao taskDao = new FakeTaskTypeDao();
-        CourseDao courseDao = new FakeCourseDao();
+        TaskTypeDao taskDao = new FakeTaskTypeDao(entryDao);
+        CourseDao courseDao = new FakeCourseDao(taskDao);
         
         //Init logic
-        CourseTaskManager courseTaskManager = new CourseTaskManager(courseDao, taskDao);
-        EntryManager entryManager = new EntryManager(taskDao, entryDao);
-        TaskService service = new TaskService(courseTaskManager, entryManager);
+        StudytrackService service = new StudytrackService(courseDao, taskDao, entryDao);
         
         //Init UI
         Scanner reader = new Scanner(System.in);

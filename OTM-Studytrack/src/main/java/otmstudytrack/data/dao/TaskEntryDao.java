@@ -1,5 +1,6 @@
-package otmstudytrack.dao;
+package otmstudytrack.data.dao;
 
+import java.time.Duration;
 import java.util.List;
 import otmstudytrack.data.Course;
 import otmstudytrack.data.TaskEntry;

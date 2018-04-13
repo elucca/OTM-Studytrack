@@ -1,4 +1,4 @@
-package otmstudytrack.dao;
+package otmstudytrack.data.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,10 @@ import otmstudytrack.data.TaskType;
 public class FakeTaskTypeDao implements TaskTypeDao {
 
     private List<TaskType> taskTypes;
+    private TaskEntryDao entryDao;
 
-    public FakeTaskTypeDao() {
+    public FakeTaskTypeDao(TaskEntryDao entryDao) {
+        this.entryDao = entryDao;
         this.taskTypes = new ArrayList<>();
     }
 
@@ -19,19 +21,26 @@ public class FakeTaskTypeDao implements TaskTypeDao {
     }
 
     @Override
-    public void addTaskType(List<TaskType> taskTypes) {
+    public void addTaskTypes(List<TaskType> taskTypes) {
         taskTypes.addAll(taskTypes);
     }
 
     @Override
     public TaskType findTaskType(TaskType taskType) {
+        TaskType foundTaskType = null;
+
         for (TaskType task : taskTypes) {
             if (task.equals(taskType)) {
-                return task;
+                foundTaskType = task;
             }
         }
-        
-        return null;
+
+        if (foundTaskType == null) {
+            return null;
+        }
+
+        foundTaskType.addEntries(entryDao.findEntriesOfAType(foundTaskType));
+        return foundTaskType;
     }
 
     @Override

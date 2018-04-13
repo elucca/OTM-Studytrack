@@ -1,15 +1,18 @@
-package otmstudytrack.dao;
+package otmstudytrack.data.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 import otmstudytrack.data.Course;
+import otmstudytrack.data.TaskType;
 
 public class FakeCourseDao implements CourseDao {
     
     private List<Course> courses;
+    private TaskTypeDao taskDao;
     
-    public FakeCourseDao() {
+    public FakeCourseDao(TaskTypeDao taskDao) {
         this.courses = new ArrayList<>();
+        this.taskDao = taskDao;
     }
 
     @Override
@@ -19,12 +22,21 @@ public class FakeCourseDao implements CourseDao {
 
     @Override
     public Course findCourse(String name) {
+        Course foundCourse = null;
+        
         for (Course course : courses) {
             if (course.getName().equals(name)) {
-                return course;
+                foundCourse = course;
             }
         }
-        return null;
+        
+        if (foundCourse == null) {
+            return null;
+        }
+                
+        List<TaskType> foundTasks = taskDao.findTaskTypesOfACourse(foundCourse);
+        foundCourse.addTaskTypes(foundTasks);
+        return foundCourse;
     }
 
     @Override

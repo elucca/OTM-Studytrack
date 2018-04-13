@@ -11,10 +11,11 @@ public class TaskEntry {
     private int courseWeek;
     private TaskType taskType;
     
-    public TaskEntry(Date date, int courseWeek, TaskType taskType) {
+    public TaskEntry(Date date, int courseWeek, TaskType taskType, Duration timeSpent) {
         this.timeSpent = Duration.ZERO;
         this.courseWeek = courseWeek;
         this.taskType = taskType;
+        this.timeSpent = timeSpent;
     }
     
     public void addTimeSpent(Duration timeSpent) {
@@ -36,29 +37,5 @@ public class TaskEntry {
     public TaskType getTaskType() {
         return taskType;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final TaskEntry other = (TaskEntry) obj;
-        if (this.courseWeek != other.courseWeek) {
-            return false;
-        }
-        if (!Objects.equals(this.taskType, other.taskType)) {
-            return false;
-        }
-        return true;
-    }
-    
-    
-    
     
 }

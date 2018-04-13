@@ -21,6 +21,10 @@ public class TaskType {
             this.entries.add(entry);
         }
     }
+    
+    public void addEntries(List<TaskEntry> entries) {
+        this.entries.addAll(entries);
+    }
 
     public String getName() {
         return name;
