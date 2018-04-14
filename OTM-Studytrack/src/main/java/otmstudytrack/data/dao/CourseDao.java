@@ -10,5 +10,7 @@ public interface CourseDao {
     public Course findCourse(String name);
     
     public List<Course> findAllCourses();
+    
+    public void removeCourse(Course course);
 
 }

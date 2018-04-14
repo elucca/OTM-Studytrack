@@ -58,4 +58,26 @@ public class FakeTaskEntryDao implements TaskEntryDao {
         return found;
     }
 
+    @Override
+    public boolean removeTaskEntry(TaskEntry taskEntry) {
+        boolean removed = false;
+        for (TaskEntry entry : taskEntries) {
+            if (entry.equals(taskEntry)) {
+                taskEntries.remove(taskEntry);
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    @Override
+    public void removeAllEntriesOfTaskType(TaskType taskType) {
+        for (TaskEntry found : taskEntries) {
+            if (found.getTaskType().equals(taskType)) {
+                taskEntries.remove(found);
+            }
+        }
+    }
+
 }

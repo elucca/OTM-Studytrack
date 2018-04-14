@@ -1,5 +1,6 @@
 package otmstudytrack.domain;
 
+import java.sql.Connection;
 import otmstudytrack.data.dao.TaskEntryDao;
 import otmstudytrack.data.dao.TaskTypeDao;
 import otmstudytrack.data.dao.CourseDao;
@@ -16,11 +17,13 @@ public class StudytrackService {
     private CourseDao courseDao;
     private TaskTypeDao taskDao;
     private TaskEntryDao entryDao;
+    private Connection db;
 
-    public StudytrackService(CourseDao courseDao, TaskTypeDao taskDao, TaskEntryDao entryDao) {
+    public StudytrackService(CourseDao courseDao, TaskTypeDao taskDao, TaskEntryDao entryDao, Connection db) {
         this.courseDao = courseDao;
         this.taskDao = taskDao;
         this.entryDao = entryDao;
+        this.db = db;
     }
 
     public boolean addCourse(String name) {

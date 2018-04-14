@@ -44,4 +44,10 @@ public class FakeCourseDao implements CourseDao {
         return courses;
     }
 
+    @Override
+    public void removeCourse(Course course) {
+        courses.remove(course);
+        taskDao.removeAllTaskTypesOfCourse(course);
+    }
+
 }

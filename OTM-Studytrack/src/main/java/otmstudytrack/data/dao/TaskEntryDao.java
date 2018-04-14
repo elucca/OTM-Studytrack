@@ -16,4 +16,8 @@ public interface TaskEntryDao {
     
     public List<TaskEntry> findEntriesOfATypeFromCourseWeek(TaskType taskType, int courseWeek);
     
+    public boolean removeTaskEntry(TaskEntry taskEntry);
+    
+    public void removeAllEntriesOfTaskType(TaskType taskType);
+    
 }

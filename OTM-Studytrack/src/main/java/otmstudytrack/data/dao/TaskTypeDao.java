@@ -15,5 +15,9 @@ public interface TaskTypeDao {
     public List<TaskType> findTasksOfAType(String type);
 
     public List<TaskType> findTaskTypesOfACourse(Course course);
+    
+    public boolean removeTaskType(TaskType taskType);
+    
+    public void removeAllTaskTypesOfCourse(Course course);
 
 }

@@ -34,4 +34,31 @@ public class TaskEntry {
         return taskType;
     }
     
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TaskEntry other = (TaskEntry) obj;
+        if (this.courseWeek != other.courseWeek) {
+            return false;
+        }
+        if (!Objects.equals(this.date, other.date)) {
+            return false;
+        }
+        if (!Objects.equals(this.timeSpent, other.timeSpent)) {
+            return false;
+        }
+        if (!Objects.equals(this.taskType, other.taskType)) {
+            return false;
+        }
+        return true;
+    }
+    
 }
