@@ -6,20 +6,16 @@ import java.util.Objects;
 
 public class TaskEntry {
     
-    private Date date;
-    private Duration timeSpent;
-    private int courseWeek;
-    private TaskType taskType;
+    private final Date date;
+    private final Duration timeSpent;
+    private final int courseWeek;
+    private final TaskType taskType;
     
     public TaskEntry(Date date, int courseWeek, TaskType taskType, Duration timeSpent) {
-        this.timeSpent = Duration.ZERO;
+        this.date = date;
         this.courseWeek = courseWeek;
         this.taskType = taskType;
         this.timeSpent = timeSpent;
-    }
-    
-    public void addTimeSpent(Duration timeSpent) {
-        this.timeSpent = this.timeSpent.plus(timeSpent);
     }
 
     public Date getDate() {
