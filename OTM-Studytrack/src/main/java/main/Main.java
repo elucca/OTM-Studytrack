@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import otmstudytrack.domain.StudytrackService;
 import otmstudytrack.UI.TextUI;
+import otmstudytrack.data.Database;
 import otmstudytrack.data.dao.CourseDao;
 import otmstudytrack.data.dao.FakeCourseDao;
 import otmstudytrack.data.dao.FakeTaskEntryDao;
@@ -19,13 +20,13 @@ public class Main {
         //Initializes the program
         
         //Init db
+        Database db = new Database("jdbc:sqlite:db/studytrack.db"); //URI should later come from config file
         TaskEntryDao entryDao = new FakeTaskEntryDao();
         TaskTypeDao taskDao = new FakeTaskTypeDao(entryDao);
         CourseDao courseDao = new FakeCourseDao(taskDao);
-        Connection conn = DriverManager.getConnection("jdbc:sqlite:db/studytrack.db");
         
         //Init logic
-        StudytrackService service = new StudytrackService(courseDao, taskDao, entryDao, conn);
+        StudytrackService service = new StudytrackService(courseDao, taskDao, entryDao);
         
         //Init UI
         Scanner reader = new Scanner(System.in);
