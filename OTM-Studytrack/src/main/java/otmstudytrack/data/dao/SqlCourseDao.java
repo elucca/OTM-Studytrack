@@ -2,7 +2,6 @@ package otmstudytrack.data.dao;
 
 import java.util.List;
 import otmstudytrack.data.Course;
-import otmstudytrack.data.Database;
 
 public class SqlCourseDao implements CourseDao {
     

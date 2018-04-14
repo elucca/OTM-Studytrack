@@ -1,4 +1,4 @@
-package otmstudytrack.data;
+package otmstudytrack.data.dao;
 
 import java.sql.*;
 

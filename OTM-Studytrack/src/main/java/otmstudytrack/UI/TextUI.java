@@ -1,5 +1,6 @@
 package otmstudytrack.UI;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 import otmstudytrack.domain.StudytrackService;
@@ -17,13 +18,13 @@ public class TextUI {
         this.taskService = taskService;
     }
 
-    public void start() {
+    public void start() throws SQLException {
         printOptions();
         handleInput();
 
     }
 
-    private void handleInput() {
+    private void handleInput() throws SQLException {
         while (true) {
             int input = Integer.parseInt(reader.nextLine());
             System.out.println("");

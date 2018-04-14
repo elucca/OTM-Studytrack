@@ -1,5 +1,6 @@
 package otmstudytrack.data.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import otmstudytrack.data.Course;
@@ -21,7 +22,7 @@ public class FakeCourseDao implements CourseDao {
     }
 
     @Override
-    public Course findCourse(String name) {
+    public Course findCourse(String name) throws SQLException {
         Course foundCourse = null;
         
         for (Course course : courses) {
@@ -45,7 +46,7 @@ public class FakeCourseDao implements CourseDao {
     }
 
     @Override
-    public void removeCourse(Course course) {
+    public void removeCourse(Course course) throws SQLException {
         courses.remove(course);
         taskDao.removeAllTaskTypesOfCourse(course);
     }

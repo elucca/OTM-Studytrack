@@ -1,5 +1,6 @@
 package otmstudytrack.data.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import otmstudytrack.data.Course;
@@ -26,7 +27,7 @@ public class FakeTaskTypeDao implements TaskTypeDao {
     }
 
     @Override
-    public TaskType findTaskType(TaskType taskType) {
+    public TaskType findTaskType(TaskType taskType) throws SQLException {
         TaskType foundTaskType = null;
 
         for (TaskType task : taskTypes) {
@@ -70,7 +71,7 @@ public class FakeTaskTypeDao implements TaskTypeDao {
     }
 
     @Override
-    public boolean removeTaskType(TaskType taskType) {
+    public boolean removeTaskType(TaskType taskType) throws SQLException {
         for (TaskType found : taskTypes) {
             if (found.equals(taskType)) {
                 entryDao.removeAllEntriesOfTaskType(found);
@@ -83,7 +84,7 @@ public class FakeTaskTypeDao implements TaskTypeDao {
     }
 
     @Override
-    public void removeAllTaskTypesOfCourse(Course course) {
+    public void removeAllTaskTypesOfCourse(Course course) throws SQLException {
         for (TaskType found : taskTypes) {
             if (found.getBelongsToCourse().equals(course)) {
                 taskTypes.remove(found);

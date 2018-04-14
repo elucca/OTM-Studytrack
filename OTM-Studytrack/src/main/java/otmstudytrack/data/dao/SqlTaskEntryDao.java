@@ -2,7 +2,6 @@ package otmstudytrack.data.dao;
 
 import java.sql.*;
 import java.util.List;
-import otmstudytrack.data.Database;
 import otmstudytrack.data.TaskEntry;
 import otmstudytrack.data.TaskType;
 
