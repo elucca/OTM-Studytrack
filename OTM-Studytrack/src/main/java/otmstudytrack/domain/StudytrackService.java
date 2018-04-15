@@ -2,9 +2,9 @@ package otmstudytrack.domain;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import otmstudytrack.data.dao.TaskEntryDao;
-import otmstudytrack.data.dao.TaskTypeDao;
-import otmstudytrack.data.dao.CourseDao;
+import otmstudytrack.database.dao.TaskEntryDao;
+import otmstudytrack.database.dao.TaskTypeDao;
+import otmstudytrack.database.dao.CourseDao;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;

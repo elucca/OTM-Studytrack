@@ -1,49 +1,45 @@
-package otmstudytrack.data.dao;
+package otmstudytrack.database.dao;
 
+import java.sql.*;
 import java.util.List;
-import otmstudytrack.data.Course;
+import otmstudytrack.data.TaskEntry;
 import otmstudytrack.data.TaskType;
+import otmstudytrack.database.Database;
 
-public class SqlTaskTypeDao implements TaskTypeDao {
+public class SqlTaskEntryDao implements TaskEntryDao {
 
     private Database db;
 
-    public SqlTaskTypeDao(Database db) {
+    public SqlTaskEntryDao(Database db) {
         this.db = db;
     }
 
     @Override
-    public void addTaskType(TaskType taskType) {
+    public void addTaskEntry(TaskEntry taskEntry) throws SQLException {
+    }
+
+    @Override
+    public TaskEntry findTaskEntry(TaskType taskType, int courseWeek) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void addTaskTypes(List<TaskType> taskTypes) {
+    public List<TaskEntry> findEntriesOfAType(TaskType taskType) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public TaskType findTaskType(TaskType taskType) {
+    public List<TaskEntry> findEntriesOfATypeFromCourseWeek(TaskType taskType, int courseWeek) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<TaskType> findTasksOfAType(String type) {
+    public boolean removeTaskEntry(TaskEntry taskEntry) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<TaskType> findTaskTypesOfACourse(Course course) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean removeTaskType(TaskType taskType) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void removeAllTaskTypesOfCourse(Course course) {
+    public void removeAllEntriesOfTaskType(TaskType taskType) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

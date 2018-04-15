@@ -1,4 +1,4 @@
-package otmstudytrack.data.dao;
+package otmstudytrack.database.dao;
 
 import java.sql.SQLException;
 import java.time.Duration;

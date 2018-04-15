@@ -1,7 +1,10 @@
-package otmstudytrack.data.dao;
+package otmstudytrack.database.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import otmstudytrack.data.Course;
+import otmstudytrack.database.Database;
 
 public class SqlCourseDao implements CourseDao {
     
@@ -12,13 +15,16 @@ public class SqlCourseDao implements CourseDao {
     }
     
     @Override
-    public void addCourse(Course course) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addCourse(Course course) throws SQLException {
+        PreparedStatement stmt = db.getConn().prepareStatement("INSERT INTO Course (name) VALUES (?)");
+        stmt.setString(1, course.getName());
+        stmt.execute();
+        stmt.close();
     }
 
     @Override
-    public Course findCourse(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Course findCourse(String name) throws SQLException {
+        PreparedStatement stmt = db.getConn().prepareStatement("");
     }
 
     @Override
