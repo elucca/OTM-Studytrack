@@ -4,9 +4,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 import otmstudytrack.domain.StudytrackService;
-import otmstudytrack.data.Course;
-import otmstudytrack.data.TaskEntry;
-import otmstudytrack.data.TaskType;
+import otmstudytrack.domain.data.Course;
+import otmstudytrack.domain.data.TaskEntry;
+import otmstudytrack.domain.data.TaskType;
 
 public class TextUI {
 

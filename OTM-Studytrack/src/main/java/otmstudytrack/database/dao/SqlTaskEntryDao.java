@@ -4,8 +4,8 @@ import java.sql.*;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import otmstudytrack.data.TaskEntry;
-import otmstudytrack.data.TaskType;
+import otmstudytrack.domain.data.TaskEntry;
+import otmstudytrack.domain.data.TaskType;
 import otmstudytrack.database.Database;
 
 public class SqlTaskEntryDao {

@@ -1,4 +1,4 @@
-package otmstudytrack.data;
+package otmstudytrack.domain.data;
 
 import java.time.Duration;
 import java.util.Date;

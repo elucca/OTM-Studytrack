@@ -3,7 +3,7 @@ package otmstudytrack.database.dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import otmstudytrack.data.Course;
+import otmstudytrack.domain.data.Course;
 import otmstudytrack.database.Database;
 
 public class SqlCourseDao {

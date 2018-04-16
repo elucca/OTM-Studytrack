@@ -7,9 +7,9 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import otmstudytrack.data.Course;
-import otmstudytrack.data.TaskEntry;
-import otmstudytrack.data.TaskType;
+import otmstudytrack.domain.data.Course;
+import otmstudytrack.domain.data.TaskEntry;
+import otmstudytrack.domain.data.TaskType;
 
 public class StudytrackService {
 

@@ -7,8 +7,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import otmstudytrack.database.dao.FakeCourseDao;
 import otmstudytrack.database.dao.FakeTaskTypeDao;
-import otmstudytrack.data.Course;
-import otmstudytrack.data.TaskType;
+import otmstudytrack.domain.data.Course;
+import otmstudytrack.domain.data.TaskType;
 
 public class CourseTaskManagerTest {
     
