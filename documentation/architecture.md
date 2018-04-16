@@ -1,1 +1,1 @@
-![UML diagram](OTM-Studytrack/documentation/misc/architecture_diagram.png)
+![UML diagram](misc/architecture_diagram.png)
