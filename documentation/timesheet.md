@@ -7,3 +7,4 @@
 | 13.4.2018     | 2h 35m        |  Refactored most data-related functionality to better fit requirements    |
 | 14.4.2018     | 4h 20m        |  Refactoring, database planning, started work on database functionality   |
 | 15.4.2018     | 6h 12m        |  Implemented database functionality, performed related refactoring        |
+| 16.4.2018     | 0h 45m        |  Created architecture UML diagram                                         |
