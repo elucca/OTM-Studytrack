@@ -7,7 +7,8 @@ import otmstudytrack.data.Course;
 import otmstudytrack.data.TaskEntry;
 import otmstudytrack.data.TaskType;
 
-public class FakeTaskEntryDao implements TaskEntryDao {
+@Deprecated
+public class FakeTaskEntryDao{
 
     private List<TaskEntry> taskEntries;
 
@@ -15,12 +16,10 @@ public class FakeTaskEntryDao implements TaskEntryDao {
         this.taskEntries = new ArrayList<>();
     }
 
-    @Override
     public void addTaskEntry(TaskEntry taskEntry) {
         taskEntries.add(taskEntry);
     }
 
-    @Override
     public TaskEntry findTaskEntry(TaskType taskType, int courseWeek) {
         for (TaskEntry taskEntry : taskEntries) {
             if (taskEntry.getTaskType().equals(taskType)
@@ -31,7 +30,6 @@ public class FakeTaskEntryDao implements TaskEntryDao {
         return null;
     }
 
-    @Override
     public List<TaskEntry> findEntriesOfAType(TaskType taskType) {
         List<TaskEntry> found = new ArrayList<>();
 
@@ -44,7 +42,6 @@ public class FakeTaskEntryDao implements TaskEntryDao {
         return found;
     }
 
-    @Override
     public List<TaskEntry> findEntriesOfATypeFromCourseWeek(TaskType taskType, int courseWeek) {
         List<TaskEntry> found = new ArrayList<>();
 
@@ -58,7 +55,6 @@ public class FakeTaskEntryDao implements TaskEntryDao {
         return found;
     }
 
-    @Override
     public boolean removeTaskEntry(TaskEntry taskEntry) {
         boolean removed = false;
         for (TaskEntry entry : taskEntries) {
@@ -71,7 +67,6 @@ public class FakeTaskEntryDao implements TaskEntryDao {
         return false;
     }
     
-    @Override
     public void removeAllEntriesOfTaskType(TaskType taskType) {
         for (TaskEntry found : taskEntries) {
             if (found.getTaskType().equals(taskType)) {

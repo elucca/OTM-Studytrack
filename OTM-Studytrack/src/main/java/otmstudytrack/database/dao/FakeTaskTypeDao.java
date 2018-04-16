@@ -6,32 +6,30 @@ import java.util.List;
 import otmstudytrack.data.Course;
 import otmstudytrack.data.TaskType;
 
-public class FakeTaskTypeDao implements TaskTypeDao {
+@Deprecated
+public class FakeTaskTypeDao {
 
     private List<TaskType> taskTypes;
-    private TaskEntryDao entryDao;
+    private FakeTaskEntryDao entryDao;
 
-    public FakeTaskTypeDao(TaskEntryDao entryDao) {
+    public FakeTaskTypeDao(FakeTaskEntryDao entryDao) {
         this.entryDao = entryDao;
         this.taskTypes = new ArrayList<>();
     }
 
-    @Override
     public void addTaskType(TaskType taskType) {
         taskTypes.add(taskType);
     }
 
-    @Override
     public void addTaskTypes(List<TaskType> taskTypes) {
         taskTypes.addAll(taskTypes);
     }
 
-    @Override
-    public TaskType findTaskType(TaskType taskType) throws SQLException {
+    public TaskType findTaskType(String name, Course course) throws SQLException {
         TaskType foundTaskType = null;
 
         for (TaskType task : taskTypes) {
-            if (task.equals(taskType)) {
+            if (task.getName().equals(name)) {
                 foundTaskType = task;
             }
         }
@@ -44,20 +42,6 @@ public class FakeTaskTypeDao implements TaskTypeDao {
         return foundTaskType;
     }
 
-    @Override
-    public List<TaskType> findTasksOfAType(String type) {
-        List<TaskType> found = new ArrayList<>();
-
-        for (TaskType taskType : taskTypes) {
-            if (taskType.getName().equals(type)) {
-                found.add(taskType);
-            }
-        }
-
-        return found;
-    }
-
-    @Override
     public List<TaskType> findTaskTypesOfACourse(Course course) {
         List<TaskType> found = new ArrayList<>();
 
@@ -70,7 +54,6 @@ public class FakeTaskTypeDao implements TaskTypeDao {
         return found;
     }
 
-    @Override
     public boolean removeTaskType(TaskType taskType) throws SQLException {
         for (TaskType found : taskTypes) {
             if (found.equals(taskType)) {
@@ -79,11 +62,10 @@ public class FakeTaskTypeDao implements TaskTypeDao {
                 return true;
             }
         }
-        
+
         return false;
     }
 
-    @Override
     public void removeAllTaskTypesOfCourse(Course course) throws SQLException {
         for (TaskType found : taskTypes) {
             if (found.getBelongsToCourse().equals(course)) {

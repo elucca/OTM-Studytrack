@@ -6,22 +6,21 @@ import java.util.List;
 import otmstudytrack.data.Course;
 import otmstudytrack.data.TaskType;
 
-public class FakeCourseDao implements CourseDao {
+@Deprecated
+public class FakeCourseDao {
     
     private List<Course> courses;
-    private TaskTypeDao taskDao;
+    private FakeTaskTypeDao taskDao;
     
-    public FakeCourseDao(TaskTypeDao taskDao) {
+    public FakeCourseDao(FakeTaskTypeDao taskDao) {
         this.courses = new ArrayList<>();
         this.taskDao = taskDao;
     }
 
-    @Override
     public void addCourse(Course course) {
         courses.add(course);
     }
 
-    @Override
     public Course findCourse(String name) throws SQLException {
         Course foundCourse = null;
         
@@ -40,12 +39,10 @@ public class FakeCourseDao implements CourseDao {
         return foundCourse;
     }
 
-    @Override
     public List<Course> findAllCourses() {
         return courses;
     }
 
-    @Override
     public void removeCourse(Course course) throws SQLException {
         courses.remove(course);
         taskDao.removeAllTaskTypesOfCourse(course);

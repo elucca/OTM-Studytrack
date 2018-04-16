@@ -16,9 +16,9 @@ public class Main {
         
         //Init db
         Database db = new Database("jdbc:sqlite:db/studytrack.db"); //URI should later come from config file
-        TaskEntryDao entryDao = new FakeTaskEntryDao();
-        TaskTypeDao taskDao = new FakeTaskTypeDao(entryDao);
-        CourseDao courseDao = new FakeCourseDao(taskDao);
+        SqlTaskEntryDao entryDao = new SqlTaskEntryDao(db);
+        SqlTaskTypeDao taskDao = new SqlTaskTypeDao(db, entryDao);
+        SqlCourseDao courseDao = new SqlCourseDao(db, taskDao);
         
         //Init logic
         StudytrackService service = new StudytrackService(courseDao, taskDao, entryDao);
