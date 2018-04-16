@@ -5,8 +5,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import otmstudytrack.database.dao.FakeCourseDao;
-import otmstudytrack.database.dao.FakeTaskTypeDao;
+import otmstudytrack.database.FakeCourseDao;
+import otmstudytrack.database.FakeTaskTypeDao;
 import otmstudytrack.domain.data.Course;
 import otmstudytrack.domain.data.TaskType;
 

@@ -1,5 +1,8 @@
 package otmstudytrack.main;
 
+import otmstudytrack.database.SqlTaskTypeDao;
+import otmstudytrack.database.SqlCourseDao;
+import otmstudytrack.database.SqlTaskEntryDao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -7,7 +10,6 @@ import java.util.Scanner;
 import otmstudytrack.domain.StudytrackService;
 import otmstudytrack.UI.TextUI;
 import otmstudytrack.database.Database;
-import otmstudytrack.database.dao.*;
 
 public class Main {
     

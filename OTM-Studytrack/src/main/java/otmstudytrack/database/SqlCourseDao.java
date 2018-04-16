@@ -1,10 +1,9 @@
-package otmstudytrack.database.dao;
+package otmstudytrack.database;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import otmstudytrack.domain.data.Course;
-import otmstudytrack.database.Database;
 
 public class SqlCourseDao {
 

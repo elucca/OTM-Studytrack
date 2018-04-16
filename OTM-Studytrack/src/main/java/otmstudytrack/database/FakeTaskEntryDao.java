@@ -1,4 +1,4 @@
-package otmstudytrack.database.dao;
+package otmstudytrack.database;
 
 import java.time.Duration;
 import java.util.ArrayList;

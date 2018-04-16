@@ -1,8 +1,10 @@
 package otmstudytrack.domain;
 
+import otmstudytrack.database.SqlTaskTypeDao;
+import otmstudytrack.database.SqlCourseDao;
+import otmstudytrack.database.SqlTaskEntryDao;
 import java.sql.Connection;
 import java.sql.SQLException;
-import otmstudytrack.database.dao.*;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;

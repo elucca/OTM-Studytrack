@@ -1,4 +1,4 @@
-package otmstudytrack.database.dao;
+package otmstudytrack.database;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
