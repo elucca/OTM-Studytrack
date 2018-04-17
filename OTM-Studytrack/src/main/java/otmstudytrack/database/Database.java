@@ -7,7 +7,7 @@ public class Database {
     private Connection conn;
 
     public Database(String databaseURI) throws SQLException {
-        this.conn = DriverManager.getConnection(databaseURI);
+        this.conn = DriverManager.getConnection("jdbc:sqlite:" + databaseURI);
         createTables();
     }
 

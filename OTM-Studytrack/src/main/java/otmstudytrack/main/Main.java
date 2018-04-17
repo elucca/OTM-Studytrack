@@ -17,7 +17,7 @@ public class Main {
         //Initializes the program
         
         //Init db
-        Database db = new Database("jdbc:sqlite:db/studytrack.db"); //URI should later come from config file
+        Database db = new Database("db/studytrack.db"); //URI should later come from config file
         SqlTaskEntryDao entryDao = new SqlTaskEntryDao(db);
         SqlTaskTypeDao taskDao = new SqlTaskTypeDao(db, entryDao);
         SqlCourseDao courseDao = new SqlCourseDao(db, taskDao);
