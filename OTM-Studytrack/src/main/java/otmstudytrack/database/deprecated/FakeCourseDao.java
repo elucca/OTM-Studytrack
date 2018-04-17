@@ -1,4 +1,4 @@
-package otmstudytrack.database;
+package otmstudytrack.database.deprecated;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

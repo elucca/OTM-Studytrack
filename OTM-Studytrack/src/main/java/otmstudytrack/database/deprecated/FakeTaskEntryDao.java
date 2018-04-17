@@ -1,4 +1,4 @@
-package otmstudytrack.database;
+package otmstudytrack.database.deprecated;
 
 import java.time.Duration;
 import java.util.ArrayList;
