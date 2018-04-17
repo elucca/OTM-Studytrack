@@ -16,10 +16,12 @@ public class SqlCourseDao {
     }
 
     public void addCourse(Course course) throws SQLException {
-        PreparedStatement stmt = db.getConn().prepareStatement("INSERT INTO Course (name) VALUES (?)");
-        stmt.setString(1, course.getName());
-        stmt.execute();
-        stmt.close();
+        if (findCourse(course.getName()) == null) {
+            PreparedStatement stmt = db.getConn().prepareStatement("INSERT INTO Course (name) VALUES (?)");
+            stmt.setString(1, course.getName());
+            stmt.execute();
+            stmt.close();
+        }
     }
 
     public Course findCourse(String name) throws SQLException {
@@ -28,7 +30,6 @@ public class SqlCourseDao {
         PreparedStatement courseStmt = db.getConn().prepareStatement("SELECT * FROM Course WHERE Course.name = ?");
         courseStmt.setString(1, name);
         ResultSet courseRs = courseStmt.executeQuery();
-        courseStmt.close();
 
         if (courseRs.next()) {
             Course course = new Course(courseRs.getString("name"));
@@ -39,6 +40,7 @@ public class SqlCourseDao {
         }
 
         courseRs.close();
+        courseStmt.close();
 
         return null;
     }
@@ -46,7 +48,6 @@ public class SqlCourseDao {
     public List<Course> findAllCourses() throws SQLException {
         PreparedStatement coursesStmt = db.getConn().prepareStatement("SELECT * FROM Course");
         ResultSet coursesRs = coursesStmt.executeQuery();
-        coursesStmt.close();
 
         List<Course> foundCourses = new ArrayList<>();
 
@@ -55,6 +56,7 @@ public class SqlCourseDao {
             foundCourses.add(foundCourse);
         }
 
+        coursesStmt.close();
         coursesRs.close();
 
         return foundCourses;
@@ -66,9 +68,9 @@ public class SqlCourseDao {
         if (courseId != -1) {
             PreparedStatement removeStmt = db.getConn().prepareStatement("DELETE FROM Course WHERE Course.name = ?");
             removeStmt.setString(1, course.getName());
-            removeStmt.close();
-
+            removeStmt.execute();
             taskDao.removeAllTaskTypesOfCourse(courseId);
+            removeStmt.close();
         }
     }
 
@@ -76,11 +78,16 @@ public class SqlCourseDao {
         PreparedStatement courseStmt = db.getConn().prepareStatement("SELECT Course.id FROM Course WHERE Course.name = ?");
         courseStmt.setString(1, course.getName());
         ResultSet courseRs = courseStmt.executeQuery();
-        courseStmt.close();
 
         if (courseRs.next()) {
-            return courseRs.getInt("id");
+            int foundId = courseRs.getInt("id");
+            courseStmt.close();
+            courseRs.close();
+            return foundId;
         }
+
+        courseStmt.close();
+        courseRs.close();
 
         return -1;
     }

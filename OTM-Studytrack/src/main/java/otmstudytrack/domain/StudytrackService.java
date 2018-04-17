@@ -25,13 +25,9 @@ public class StudytrackService {
         this.entryDao = entryDao;
     }
 
-    public boolean addCourse(String name) throws SQLException {
+    public void addCourse(String name) throws SQLException {
         //Doesn't add duplicates
-        if (courseDao.findCourse(name) == null) {
-            courseDao.addCourse(new Course(name));
-            return true;
-        }
-        return false;
+        courseDao.addCourse(new Course(name));
     }
 
     public boolean addTaskType(String task, String courseName) throws SQLException {

@@ -1,6 +1,8 @@
 package otmstudytrack.database;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Database {
 
@@ -32,6 +34,27 @@ public class Database {
 
     public Connection getConn() throws SQLException {
         return conn;
+    }
+
+    public void deleteAllData() throws SQLException {
+        PreparedStatement getTables = conn.prepareStatement("SELECT name FROM sqlite_master WHERE type='table'");
+        ResultSet tablesRs = getTables.executeQuery();
+
+        List<String> tables = new ArrayList<>();
+
+        while (tablesRs.next()) {
+            tables.add(tablesRs.getString("name"));
+        }
+
+        for (String table : tables) {
+            PreparedStatement dropTable = conn.prepareStatement("DROP TABLE IF EXISTS " + table);
+            dropTable.execute();
+            dropTable.close();
+        }
+        
+        tablesRs.close();
+
+        createTables();
     }
 
 }

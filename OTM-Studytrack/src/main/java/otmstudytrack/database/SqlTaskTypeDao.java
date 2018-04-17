@@ -36,16 +36,19 @@ public class SqlTaskTypeDao {
         taskStmt.setString(1, name);
         taskStmt.setInt(2, courseId);
         ResultSet taskRs = taskStmt.executeQuery();
-        taskStmt.close();
 
         if (taskRs.next()) {
             String foundName = taskRs.getString("name");
             TaskType foundTaskType = new TaskType(foundName, course);
             int foundId = taskRs.getInt("id");
             foundTaskType.addEntries(entryDao.findEntriesOfAType(foundTaskType, foundId));
+            taskStmt.close();
             taskRs.close();
             return foundTaskType;
         }
+
+        taskStmt.close();
+        taskRs.close();
 
         return null;
     }
@@ -54,29 +57,31 @@ public class SqlTaskTypeDao {
         PreparedStatement taskStmt = db.getConn().prepareStatement("SELECT * FROM TaskType WHERE TaskType.course_id = ?");
         taskStmt.setInt(1, courseId);
         ResultSet tasksRs = taskStmt.executeQuery();
-        taskStmt.close();
 
         List<TaskType> foundTasks = new ArrayList<>();
 
         while (tasksRs.next()) {
             foundTasks.add(new TaskType(tasksRs.getString("name"), course));
         }
+        taskStmt.close();
         tasksRs.close();
 
         return foundTasks;
     }
-    
+
     public int findTaskTypeId(TaskType taskType) throws SQLException {
         PreparedStatement idStmt = db.getConn().prepareStatement("SELECT id FROM TaskType WHERE TaskType.name = ?");
         idStmt.setString(1, taskType.getName());
         ResultSet idRs = idStmt.executeQuery();
-        
+
         if (idRs.next()) {
+            idStmt.close();
             idRs.close();
             return idRs.getInt("id");
         }
+        idStmt.close();
         idRs.close();
-        
+
         return -1;
     }
 

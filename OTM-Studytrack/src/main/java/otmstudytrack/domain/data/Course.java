@@ -32,7 +32,8 @@ public class Course {
 
     @Override
     public int hashCode() {
-        int hash = 3;
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.name);
         return hash;
     }
 
@@ -52,6 +53,13 @@ public class Course {
             return false;
         }
         return true;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return name;
     }
 
 }

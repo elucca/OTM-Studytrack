@@ -33,15 +33,16 @@ public class SqlTaskEntryDao {
         entryStmt.setInt(1, taskTypeId);
         entryStmt.setInt(2, courseWeek);
         ResultSet entryRs = entryStmt.executeQuery();
-        entryStmt.close();
 
         if (entryRs.next()) {
             Date date = entryRs.getDate("date");
             Duration timeSpent = Duration.ofSeconds(entryRs.getLong("timespent"));
+            entryStmt.close();
             entryRs.close();
             return new TaskEntry(date, courseWeek, taskType, timeSpent);
         }
 
+        entryStmt.close();
         entryRs.close();
 
         return null;
@@ -51,7 +52,6 @@ public class SqlTaskEntryDao {
         PreparedStatement entriesStmt = db.getConn().prepareStatement("SELECT * FROM TaskEntry WHERE TaskEntry.tasktype_id = ?");
         entriesStmt.setInt(1, taskTypeId);
         ResultSet entriesRs = entriesStmt.executeQuery();
-        entriesStmt.close();
 
         List<TaskEntry> foundEntries = new ArrayList<>();
         while (entriesRs.next()) {
@@ -61,6 +61,7 @@ public class SqlTaskEntryDao {
             foundEntries.add(new TaskEntry(date, courseWeek, taskType, timeSpent));
         }
 
+        entriesStmt.close();
         entriesRs.close();
 
         return foundEntries;
@@ -72,8 +73,7 @@ public class SqlTaskEntryDao {
         entriesStmt.setInt(1, courseWeek);
         entriesStmt.setInt(2, taskTypeId);
         ResultSet entriesRs = entriesStmt.executeQuery();
-        entriesStmt.close();
-        
+
         List<TaskEntry> foundEntries = new ArrayList<>();
         while (entriesRs.next()) {
             Date date = entriesRs.getDate("date");
@@ -81,6 +81,7 @@ public class SqlTaskEntryDao {
             foundEntries.add(new TaskEntry(date, courseWeek, taskType, timeSpent));
         }
 
+        entriesStmt.close();
         entriesRs.close();
 
         return foundEntries;
