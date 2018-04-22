@@ -29,11 +29,21 @@ public class Database {
                 + " TaskEntry (id integer PRIMARY KEY, date integer, timeSpent integer,"
                 + " courseWeek integer, taskType_id integer, "
                 + "FOREIGN KEY (taskType_id) REFERENCES TaskType(id))");
+        createEntries.execute();
+        createEntries.close();
 
     }
 
     public Connection getConn() throws SQLException {
         return conn;
+    }
+    
+    public void closeConnection() throws SQLException {
+        conn.close();
+    }
+    
+    public void recreateConnection(String databaseURI) throws SQLException {
+        this.conn = DriverManager.getConnection("jdbc:sqlite:" + databaseURI);
     }
 
     public void deleteAllData() throws SQLException {

@@ -17,6 +17,8 @@ public class SqlTaskTypeDao {
     }
 
     public void addTaskType(TaskType taskType, int courseId) throws SQLException {
+        //Currently allows adding TaskTypes to nonexistent courses. Doesn't break
+        //anything, but can result in spurious database entries.
         PreparedStatement taskStmt = db.getConn().prepareStatement("INSERT INTO TaskType (name, course_id) VALUES (?, ?)");
         taskStmt.setString(1, taskType.getName());
         taskStmt.setInt(2, courseId);
@@ -70,14 +72,15 @@ public class SqlTaskTypeDao {
     }
 
     public int findTaskTypeId(TaskType taskType) throws SQLException {
-        PreparedStatement idStmt = db.getConn().prepareStatement("SELECT id FROM TaskType WHERE TaskType.name = ?");
+        PreparedStatement idStmt = db.getConn().prepareStatement("SELECT TaskType.id FROM TaskType WHERE TaskType.name = ?");
         idStmt.setString(1, taskType.getName());
         ResultSet idRs = idStmt.executeQuery();
 
         if (idRs.next()) {
-            idStmt.close();
+            int foundId = idRs.getInt("id");
             idRs.close();
-            return idRs.getInt("id");
+            idStmt.close();
+            return foundId;
         }
         idStmt.close();
         idRs.close();
@@ -89,12 +92,14 @@ public class SqlTaskTypeDao {
         PreparedStatement removeStmt = db.getConn().prepareStatement("DELETE FROM TaskType WHERE TaskType.name = ? AND TaskType.course_id = ?");
         removeStmt.setString(1, taskType.getName());
         removeStmt.setInt(2, courseId);
+        removeStmt.execute();
         removeStmt.close();
     }
 
     public void removeAllTaskTypesOfCourse(int courseId) throws SQLException {
         PreparedStatement removeStmt = db.getConn().prepareStatement("DELETE FROM TaskType WHERE TaskType.course_id = ?");
         removeStmt.setInt(1, courseId);
+        removeStmt.execute();
         removeStmt.close();
     }
 

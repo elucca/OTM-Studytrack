@@ -21,7 +21,7 @@ public class TaskType {
             this.entries.add(entry);
         }
     }
-    
+
     public void addEntries(List<TaskEntry> entries) {
         this.entries.addAll(entries);
     }
@@ -58,7 +58,10 @@ public class TaskType {
         }
         return true;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "TaskType{" + "name=" + name + ", belongsToCourse=" + belongsToCourse + '}';
+    }
 
 }
