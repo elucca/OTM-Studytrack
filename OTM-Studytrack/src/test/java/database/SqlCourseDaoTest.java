@@ -1,6 +1,5 @@
 package database;
 
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashSet;

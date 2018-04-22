@@ -8,7 +8,7 @@ import otmstudytrack.domain.data.TaskEntry;
 import otmstudytrack.domain.data.TaskType;
 
 @Deprecated
-public class FakeTaskEntryDao{
+public class FakeTaskEntryDao {
 
     private List<TaskEntry> taskEntries;
 
@@ -63,10 +63,10 @@ public class FakeTaskEntryDao{
                 return true;
             }
         }
-        
+
         return false;
     }
-    
+
     public void removeAllEntriesOfTaskType(TaskType taskType) {
         for (TaskEntry found : taskEntries) {
             if (found.getTaskType().equals(taskType)) {
