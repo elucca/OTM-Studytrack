@@ -1,20 +1,15 @@
 package database;
 
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Rule;
-import org.junit.rules.TemporaryFolder;
 import otmstudytrack.database.*;
 import otmstudytrack.domain.data.Course;
 
