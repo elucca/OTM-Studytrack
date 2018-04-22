@@ -30,8 +30,8 @@ public class SqlTaskEntryDao {
     public TaskEntry findTaskEntry(TaskType taskType, int taskTypeId, int courseWeek) throws SQLException {
         PreparedStatement entryStmt = db.getConn().prepareStatement("SELECT * FROM TaskEntry WHERE TaskEntry.courseweek = ? "
                 + "AND TaskEntry.tasktype_id = ?");
-        entryStmt.setInt(1, taskTypeId);
-        entryStmt.setInt(2, courseWeek);
+        entryStmt.setInt(1, courseWeek);
+        entryStmt.setInt(2, taskTypeId);
         ResultSet entryRs = entryStmt.executeQuery();
 
         if (entryRs.next()) {
@@ -89,7 +89,7 @@ public class SqlTaskEntryDao {
 
     public void removeTaskEntry(TaskEntry taskEntry, int taskTypeId) throws SQLException {
         //id integer, date integer, timeSpent integer, courseWeek integer, taskType_id integer
-        PreparedStatement removeStmt = db.getConn().prepareStatement("DELETE FROM TaskEntry WHERE date = ? AND timespent = ? AND"
+        PreparedStatement removeStmt = db.getConn().prepareStatement("DELETE FROM TaskEntry WHERE date = ? AND timespent = ? AND "
                 + "courseweek = ? AND tasktype_id = ?");
         removeStmt.setLong(1, taskEntry.getDate().getTime());
         removeStmt.setLong(2, taskEntry.getTimeSpent().getSeconds());

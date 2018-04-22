@@ -33,7 +33,15 @@ public class TaskEntry {
     public TaskType getTaskType() {
         return taskType;
     }
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + this.courseWeek;
+        hash = 23 * hash + Objects.hashCode(this.taskType);
+        return hash;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -49,16 +57,12 @@ public class TaskEntry {
         if (this.courseWeek != other.courseWeek) {
             return false;
         }
-        if (!Objects.equals(this.date, other.date)) {
-            return false;
-        }
-        if (!Objects.equals(this.timeSpent, other.timeSpent)) {
-            return false;
-        }
         if (!Objects.equals(this.taskType, other.taskType)) {
             return false;
         }
         return true;
     }
+    
+
     
 }
