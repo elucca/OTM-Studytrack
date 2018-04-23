@@ -17,14 +17,18 @@ Tests are ran using the command:
 mvn test
 ```
 
-A test coverage report is created using the command:
+A test coverage report is created using the below command. The report can be accessed by opening the file _target/site/jacoco/index.html_ using a browser.
 ```
 mvn jacoco:report
 ```
-The test coverage report can be accessed by opening the file _target/site/jacoco/index.html_ using a browser.
 
-Checkstyle is ran using the command: 
+Checkstyle is ran using the below command. Checkstyle follows the criteria defined in [checkstyle.xml](https://github.com/elucca/OTM-Studytrack/blob/master/OTM-Studytrack/checkstyle.xml). Potential errors can be seen by opening the file _target/site/checkstyle.html_ using a browser.
 ```
- mvn jxr:jxr checkstyle:checkstyle
+mvn jxr:jxr checkstyle:checkstyle
 ```
-Checkstyle follows the criteria defined in [checkstyle.xml](https://github.com/elucca/OTM-Studytrack/blob/master/OTM-Studytrack/checkstyle.xml). Potential errors can be seen by opening the file _target/site/checkstyle.html_ using a browser.
+
+A jar package of the program is created in the _target_ folder using the following command.
+```
+mvn package
+```
+
