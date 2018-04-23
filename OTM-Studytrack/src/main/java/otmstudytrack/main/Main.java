@@ -1,5 +1,9 @@
 package otmstudytrack.main;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
+import java.net.URLDecoder;
 import otmstudytrack.database.SqlTaskTypeDao;
 import otmstudytrack.database.SqlCourseDao;
 import otmstudytrack.database.SqlTaskEntryDao;
@@ -13,16 +17,18 @@ import otmstudytrack.database.Database;
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, UnsupportedEncodingException, URISyntaxException {
         //Initializes the program
 
         //Init db
-        Database db = new Database("db/studytrack.db"); //URI should later come from config file
+        //Database file URI should later come from config file
+        File dbDir = new File("db");
+        dbDir.mkdir();
+
+        Database db = new Database("db" + File.separator + "studytrack.db");
         SqlTaskEntryDao entryDao = new SqlTaskEntryDao(db);
         SqlTaskTypeDao taskDao = new SqlTaskTypeDao(db, entryDao);
         SqlCourseDao courseDao = new SqlCourseDao(db, taskDao);
-
-        db.deleteAllData();
 
         //Init logic
         StudytrackService service = new StudytrackService(courseDao, taskDao, entryDao);
