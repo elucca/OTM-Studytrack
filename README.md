@@ -12,6 +12,9 @@ Studytrack is a tool for tracking time spent on university coursework. It allows
 
 ## Command line functionality
 
+
+### Tests
+
 Tests are ran using the command:
 ```
 mvn test
@@ -22,10 +25,14 @@ A test coverage report is created using the below command. The report can be acc
 mvn jacoco:report
 ```
 
+### Checkstyle
+
 Checkstyle is ran using the below command. Checkstyle follows the criteria defined in [checkstyle.xml](https://github.com/elucca/OTM-Studytrack/blob/master/OTM-Studytrack/checkstyle.xml). Potential errors can be seen by opening the file _target/site/checkstyle.html_ using a browser.
 ```
 mvn jxr:jxr checkstyle:checkstyle
 ```
+
+### Generating a jar package
 
 A jar package of the program is created in the _target_ folder using the following command.
 ```
