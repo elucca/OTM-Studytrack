@@ -11,3 +11,4 @@
 | 17.4.2018     | 2h 40m        |  Implemented tests for and fixed bugs of part of db functionality         |
 | 22.4.2018     | 2h 17m        |  Implemented remaining dao tests and fixed related bugs                   |
 | 23.4.2018     | 2h 42m        |  Performed bugfixing and refactoring of database functionality            |
+| 24.4          | 1h 40m        |  Performed bugfixing and testing and made first release                   |
