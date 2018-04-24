@@ -18,6 +18,7 @@ Week 5 - [v0.1-alpha](https://github.com/elucca/OTM-Studytrack/releases/tag/week
 
 ## Command line functionality
 
+All console commands need to be ran in the OTM-Studytrack subfolder which contains the application, i.e. the folder with the _pom.xml_ file.
 
 ### Tests
 
