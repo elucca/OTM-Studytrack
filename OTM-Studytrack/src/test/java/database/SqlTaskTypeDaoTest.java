@@ -1,6 +1,6 @@
 package database;
 
-
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,10 @@ public class SqlTaskTypeDaoTest {
     @Before
     public void setUp() throws SQLException {
         //Creates db for test
-        db = new Database("src/test/java/db/testdb.db");
+        //db = new Database("src/test/java/db/testdb.db");
+        File dbDir = new File("src" + File.separator + "test" + File.separator + "java" + File.separator + "db");
+        dbDir.mkdir();
+        db = new Database("src" + File.separator + "test" + File.separator + "java" + File.separator + "db" + File.separator + "test.db");
         entryDao = new SqlTaskEntryDao(db);
         taskDao = new SqlTaskTypeDao(db, entryDao);
     }
@@ -98,7 +101,7 @@ public class SqlTaskTypeDaoTest {
         taskDao.addTaskType(toAdd1, 1);
         taskDao.addTaskType(toAdd2, 1);
         taskDao.removeAllTaskTypesOfCourse(1);
-        
+
         assertEquals(new ArrayList<TaskType>(), taskDao.findTaskTypesOfACourse(new Course("Tira"), 1));
     }
 

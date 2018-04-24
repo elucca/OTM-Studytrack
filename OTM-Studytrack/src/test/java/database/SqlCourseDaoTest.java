@@ -1,5 +1,6 @@
 package database;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -22,7 +23,10 @@ public class SqlCourseDaoTest {
     @Before
     public void setUp() throws SQLException, IOException {
         //Creates db for test
-        db = new Database("src/test/java/db/testdb.db");
+        File dbDir = new File("src" + File.separator + "test" + File.separator + "java" + File.separator + "db");
+        dbDir.mkdir();
+        db = new Database("src" + File.separator + "test" + File.separator + "java" + File.separator + "db" + File.separator + "test.db");
+        entryDao = new SqlTaskEntryDao(db);
         entryDao = new SqlTaskEntryDao(db);
         taskDao = new SqlTaskTypeDao(db, entryDao);
         courseDao = new SqlCourseDao(db, taskDao);
