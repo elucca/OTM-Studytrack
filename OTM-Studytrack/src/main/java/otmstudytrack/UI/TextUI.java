@@ -26,7 +26,15 @@ public class TextUI {
 
     private void handleInput() throws SQLException {
         while (true) {
-            int input = Integer.parseInt(reader.nextLine());
+            int input = -1;
+            try {
+                input = Integer.parseInt(reader.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please try again.");
+                System.out.println("");
+                continue;
+            }
+
             System.out.println("");
 
             if (input == 1) {
