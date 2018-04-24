@@ -10,3 +10,4 @@
 | 16.4.2018     | 0h 45m        |  Created architecture UML diagram                                         |
 | 17.4.2018     | 2h 40m        |  Implemented tests for and fixed bugs of part of db functionality         |
 | 22.4.2018     | 2h 17m        |  Implemented remaining dao tests and fixed related bugs                   |
+| 23.4.2018     | 2h 42m        |  Performed bugfixing and refactoring of database functionality            |
