@@ -13,9 +13,9 @@ public class TextUI {
     private Scanner reader;
     private StudytrackService taskService;
 
-    public TextUI(Scanner reader, StudytrackService taskService) {
+    public TextUI(Scanner reader, StudytrackService service) {
         this.reader = reader;
-        this.taskService = taskService;
+        this.taskService = service;
     }
 
     public void start() throws SQLException {
