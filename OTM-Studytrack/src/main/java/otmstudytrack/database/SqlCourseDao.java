@@ -16,23 +16,23 @@ public class SqlCourseDao {
     }
 
     public void addCourse(Course course) throws SQLException {
-        if (findCourse(course.getName()) == null) {
-            PreparedStatement stmt = db.getConn().prepareStatement("INSERT INTO Course (name) VALUES (?)");
+        if (findCourseByName(course.getName()) == null) {
+            PreparedStatement stmt = db.getConn().prepareStatement("INSERT INTO Course (name, subject, active) VALUES (?, ?, ?)");
             stmt.setString(1, course.getName());
+            stmt.setString(2, course.getSubject());
+            stmt.setInt(2, 1);
             stmt.execute();
             stmt.close();
         }
     }
 
-    public Course findCourse(String name) throws SQLException {
-        //First statement rather unnecessary atm since we already have the name and 
-        //courses contain nothing else.
+    public Course findCourseByName(String name) throws SQLException {
         PreparedStatement courseStmt = db.getConn().prepareStatement("SELECT * FROM Course WHERE Course.name = ?");
         courseStmt.setString(1, name);
         ResultSet courseRs = courseStmt.executeQuery();
 
         if (courseRs.next()) {
-            Course course = new Course(courseRs.getString("name"));
+            Course course = new Course(courseRs.getString("name"), courseRs.getString("subject"));
             int courseId = courseRs.getInt("id");
             course.addTaskTypes(taskDao.findTaskTypesOfACourse(course, courseId));
             courseRs.close();
@@ -52,7 +52,7 @@ public class SqlCourseDao {
         List<Course> foundCourses = new ArrayList<>();
 
         while (coursesRs.next()) {
-            Course foundCourse = new Course(coursesRs.getString("name"));
+            Course foundCourse = new Course(coursesRs.getString("name"), coursesRs.getString("subject"));
             foundCourses.add(foundCourse);
         }
 

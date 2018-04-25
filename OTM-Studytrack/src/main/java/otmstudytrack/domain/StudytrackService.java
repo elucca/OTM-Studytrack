@@ -25,24 +25,27 @@ public class StudytrackService {
         this.entryDao = entryDao;
     }
 
-    public void addCourse(String name) throws SQLException {
-        //Doesn't add duplicates
-        courseDao.addCourse(new Course(name));
+    public void addCourse(String name, String subject) throws SQLException {
+        courseDao.addCourse(new Course(name, subject));
     }
 
     public boolean addTaskType(String task, String courseName) throws SQLException {
         //Doesn't add duplicates
-        int courseId = courseDao.findCourseID(new Course(courseName));
-        if (taskDao.findTaskType(task, new Course(courseName), courseId) == null) {
-            taskDao.addTaskType(new TaskType(task, new Course(courseName)), courseId);
-            return true;
+        Course foundCourse = courseDao.findCourseByName(courseName);
+        if (foundCourse != null) {
+            int courseId = courseDao.findCourseID(foundCourse);
+            if (taskDao.findTaskType(task, foundCourse, courseId) == null) {
+                taskDao.addTaskType(new TaskType(task, foundCourse), courseId);
+                return true;
+            }
         }
+        
         return false;
     }
 
     public boolean addTaskEntry(int courseWeek, String task, String course, int hours, int minutes) throws SQLException {
         //Returns false if course or task type doesn't exist.
-        Course foundCourse = courseDao.findCourse(course);
+        Course foundCourse = courseDao.findCourseByName(course);
         if (foundCourse == null) {
             return false;
         }
@@ -68,7 +71,7 @@ public class StudytrackService {
     }
 
     public Duration getTimeSpentOnCourse(String course) throws SQLException {
-        List<TaskType> foundTasks = courseDao.findCourse(course).getTaskTypes();
+        List<TaskType> foundTasks = courseDao.findCourseByName(course).getTaskTypes();
         Duration timeSpent = Duration.ZERO;
 
         for (TaskType task : foundTasks) {
@@ -82,7 +85,7 @@ public class StudytrackService {
     }
 
     public List<TaskType> getTaskTypesOfCourse(String name) throws SQLException {
-        Course foundCourse = courseDao.findCourse(name);
+        Course foundCourse = courseDao.findCourseByName(name);
         if (foundCourse == null) {
             return new ArrayList<>();
         }
@@ -91,8 +94,9 @@ public class StudytrackService {
     }
 
     public List<TaskEntry> getEntriesOfTaskType(String task, String course) throws SQLException {
-        int courseId = courseDao.findCourseID(new Course(course));
-        return taskDao.findTaskType(task, new Course(course), courseId).getEntries();
+        Course foundCourse = courseDao.findCourseByName(course);
+        int courseId = courseDao.findCourseID(foundCourse);
+        return taskDao.findTaskType(task, foundCourse, courseId).getEntries();
     }
 
 }

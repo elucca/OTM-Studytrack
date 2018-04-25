@@ -42,10 +42,12 @@ public class TextUI {
             }
 
             if (input == 2) {
-                System.out.print("Please input the name of the course to add: ");
+                System.out.print("Input the subject of the course: ");
+                String subject = reader.nextLine();
+                
+                System.out.print("Input the name of the course:");
                 String name = reader.nextLine();
-
-                taskService.addCourse(name);
+                taskService.addCourse(name, subject);
 
                 System.out.println("");
             }

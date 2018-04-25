@@ -7,10 +7,15 @@ import java.util.Objects;
 public class Course {
 
     private String name;
+    private String subject;
+    private boolean active;
+
     private List<TaskType> taskTypes;
 
-    public Course(String name) {
+    public Course(String name, String subject) {
         this.name = name;
+        this.subject = subject;
+        this.active = true;
         this.taskTypes = new ArrayList<>();
     }
 
@@ -29,11 +34,23 @@ public class Course {
     public List<TaskType> getTaskTypes() {
         return taskTypes;
     }
+    
+    public String getSubject() {
+        return this.subject;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.name);
+        hash = 59 * hash + Objects.hashCode(this.name);
         return hash;
     }
 

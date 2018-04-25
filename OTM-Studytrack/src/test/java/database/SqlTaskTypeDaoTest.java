@@ -39,24 +39,24 @@ public class SqlTaskTypeDaoTest {
     @Test
     public void taskTypeAddedAndFoundCorrectly() throws SQLException {
         //We assume the course exists and has a courseId of 1
-        TaskType task = new TaskType("Exercises", new Course("OTM"));
+        TaskType task = new TaskType("Exercises", new Course("OTM", "CS"));
         taskDao.addTaskType(task, 1);
 
-        TaskType found = taskDao.findTaskType("Exercises", new Course("OTM"), 1);
+        TaskType found = taskDao.findTaskType("Exercises", new Course("OTM", "CS"), 1);
         assertEquals(task, found);
     }
 
     @Test
     public void multipleTaskTypesAddedCorrectly() throws SQLException {
-        TaskType toAdd1 = new TaskType("TMC", new Course("Tira"));
-        TaskType toAdd2 = new TaskType("Laskarit", new Course("Tira"));
+        TaskType toAdd1 = new TaskType("TMC", new Course("Tira", "CS"));
+        TaskType toAdd2 = new TaskType("Laskarit", new Course("Tira", "CS"));
         List<TaskType> tasks = new ArrayList<>();
         tasks.add(toAdd1);
         tasks.add(toAdd2);
 
         taskDao.addTaskTypes(tasks, 1);
-        TaskType found1 = taskDao.findTaskType("TMC", new Course("Tira"), 1);
-        TaskType found2 = taskDao.findTaskType("Laskarit", new Course("Tira"), 1);
+        TaskType found1 = taskDao.findTaskType("TMC", new Course("Tira", "CS"), 1);
+        TaskType found2 = taskDao.findTaskType("Laskarit", new Course("Tira", "CS"), 1);
         List<TaskType> foundTasks = new ArrayList<>();
         foundTasks.add(found1);
         foundTasks.add(found2);
@@ -66,43 +66,43 @@ public class SqlTaskTypeDaoTest {
 
     @Test
     public void taskTypesOfCourseFoundCorrectly() throws SQLException {
-        TaskType toAdd1 = new TaskType("TMC", new Course("Tira"));
-        TaskType toAdd2 = new TaskType("Laskarit", new Course("Tira"));
+        TaskType toAdd1 = new TaskType("TMC", new Course("Tira", "CS"));
+        TaskType toAdd2 = new TaskType("Laskarit", new Course("Tira", "CS"));
         taskDao.addTaskType(toAdd1, 1);
         taskDao.addTaskType(toAdd2, 1);
         List<TaskType> added = new ArrayList<>();
         added.add(toAdd1);
         added.add(toAdd2);
 
-        assertTrue(added.containsAll(taskDao.findTaskTypesOfACourse(new Course("Tira"), 1)));
+        assertTrue(added.containsAll(taskDao.findTaskTypesOfACourse(new Course("Tira", "CS"), 1)));
     }
 
     @Test
     public void taskTypeIdFoundCorrectly() throws SQLException {
         //Sqlite will make the first one have an id of 1
-        TaskType toAdd1 = new TaskType("TMC", new Course("Tira"));
+        TaskType toAdd1 = new TaskType("TMC", new Course("Tira", "CS"));
         taskDao.addTaskType(toAdd1, 1);
         assertEquals(1, taskDao.findTaskTypeId(toAdd1));
     }
 
     @Test
     public void removeTaskTypeWorks() throws SQLException {
-        TaskType toAdd1 = new TaskType("TMC", new Course("Tira"));
+        TaskType toAdd1 = new TaskType("TMC", new Course("Tira", "CS"));
         taskDao.addTaskType(toAdd1, 1);
 
         taskDao.removeTaskType(toAdd1, 1);
-        assertEquals(null, taskDao.findTaskType("TMC", new Course("Tira"), 1));
+        assertEquals(null, taskDao.findTaskType("TMC", new Course("Tira", "CS"), 1));
     }
 
     @Test
     public void removingTaskTypesOfCourseWorks() throws SQLException {
-        TaskType toAdd1 = new TaskType("TMC", new Course("Tira"));
-        TaskType toAdd2 = new TaskType("Laskarit", new Course("Tira"));
+        TaskType toAdd1 = new TaskType("TMC", new Course("Tira", "CS"));
+        TaskType toAdd2 = new TaskType("Laskarit", new Course("Tira", "CS"));
         taskDao.addTaskType(toAdd1, 1);
         taskDao.addTaskType(toAdd2, 1);
         taskDao.removeAllTaskTypesOfCourse(1);
 
-        assertEquals(new ArrayList<TaskType>(), taskDao.findTaskTypesOfACourse(new Course("Tira"), 1));
+        assertEquals(new ArrayList<TaskType>(), taskDao.findTaskTypesOfACourse(new Course("Tira", "CS"), 1));
     }
 
 }

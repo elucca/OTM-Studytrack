@@ -15,7 +15,7 @@ public class Database {
 
     private void createTables() throws SQLException {
         PreparedStatement createCourses = conn.prepareStatement(
-                "CREATE TABLE IF NOT EXISTS Course (id integer PRIMARY KEY, name varchar(200))");
+                "CREATE TABLE IF NOT EXISTS Course (id integer PRIMARY KEY, name varchar(200), subject varchar(200), active integer)");
         createCourses.execute();
         createCourses.close();
 
@@ -37,11 +37,11 @@ public class Database {
     public Connection getConn() throws SQLException {
         return conn;
     }
-    
+
     public void closeConnection() throws SQLException {
         conn.close();
     }
-    
+
     public void recreateConnection(String databaseURI) throws SQLException {
         this.conn = DriverManager.getConnection("jdbc:sqlite:" + databaseURI);
     }
@@ -61,7 +61,7 @@ public class Database {
             dropTable.execute();
             dropTable.close();
         }
-        
+
         tablesRs.close();
 
         createTables();

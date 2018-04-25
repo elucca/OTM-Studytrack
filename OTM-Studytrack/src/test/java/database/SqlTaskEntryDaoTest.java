@@ -38,7 +38,7 @@ public class SqlTaskEntryDaoTest {
 
     @Test
     public void entryAddedAndFoundCorrectly() throws SQLException {
-        TaskType taskOfEntry = new TaskType("TMC", new Course("Tira"));
+        TaskType taskOfEntry = new TaskType("TMC", new Course("Tira", "CS"));
         TaskEntry toAdd = new TaskEntry(new Date(), 2, taskOfEntry, Duration.ZERO);
         entryDao.addTaskEntry(toAdd, 1);
 
@@ -47,8 +47,8 @@ public class SqlTaskEntryDaoTest {
 
     @Test
     public void entriesOfTaskTypeFoundCorrectly() throws SQLException {
-        TaskType taskOfEntry = new TaskType("TMC", new Course("Tira"));
-        TaskType wrongTask = new TaskType("Laskarit", new Course("Tira"));
+        TaskType taskOfEntry = new TaskType("TMC", new Course("Tira", "CS"));
+        TaskType wrongTask = new TaskType("Laskarit", new Course("Tira", "CS"));
         TaskEntry toAdd1 = new TaskEntry(new Date(), 2, taskOfEntry, Duration.ZERO);
         TaskEntry toAdd2 = new TaskEntry(new Date(), 2, taskOfEntry, Duration.ZERO);
         TaskEntry toAdd3 = new TaskEntry(new Date(), 2, wrongTask, Duration.ZERO);
@@ -66,7 +66,7 @@ public class SqlTaskEntryDaoTest {
 
     @Test
     public void entriesOfCourseWeekFoundCorrectly() throws SQLException {
-        TaskType taskOfEntry = new TaskType("TMC", new Course("Tira"));
+        TaskType taskOfEntry = new TaskType("TMC", new Course("Tira", "CS"));
         TaskEntry toAdd1 = new TaskEntry(new Date(), 2, taskOfEntry, Duration.ZERO);
         TaskEntry toAdd2 = new TaskEntry(new Date(), 2, taskOfEntry, Duration.ZERO);
         TaskEntry toAdd3 = new TaskEntry(new Date(), 1, taskOfEntry, Duration.ZERO);
@@ -86,7 +86,7 @@ public class SqlTaskEntryDaoTest {
 
     @Test
     public void removingEntryWorks() throws SQLException {
-        TaskType taskOfEntry = new TaskType("TMC", new Course("Tira"));
+        TaskType taskOfEntry = new TaskType("TMC", new Course("Tira", "CS"));
         TaskEntry toAdd = new TaskEntry(new Date(), 2, taskOfEntry, Duration.ZERO);
         entryDao.addTaskEntry(toAdd, 1);
         entryDao.removeTaskEntry(toAdd, 1);
@@ -96,7 +96,7 @@ public class SqlTaskEntryDaoTest {
 
     @Test
     public void removingAllEntriesOfTaskWorks() throws SQLException {
-        TaskType taskOfEntry = new TaskType("TMC", new Course("Tira"));
+        TaskType taskOfEntry = new TaskType("TMC", new Course("Tira", "CS"));
         TaskEntry toAdd1 = new TaskEntry(new Date(), 2, taskOfEntry, Duration.ZERO);
         TaskEntry toAdd2 = new TaskEntry(new Date(), 2, taskOfEntry, Duration.ZERO);
         entryDao.addTaskEntry(toAdd1, 1);
