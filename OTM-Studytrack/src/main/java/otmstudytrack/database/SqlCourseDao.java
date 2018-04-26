@@ -20,13 +20,13 @@ public class SqlCourseDao {
             PreparedStatement stmt = db.getConn().prepareStatement("INSERT INTO Course (name, subject, active) VALUES (?, ?, ?)");
             stmt.setString(1, course.getName());
             stmt.setString(2, course.getSubject());
-            
+
             int active = 1;
             if (course.getActive() == false) {
                 active = 0;
             }
             stmt.setInt(3, active);
-            
+
             stmt.execute();
             stmt.close();
             return true;
@@ -41,7 +41,7 @@ public class SqlCourseDao {
 
         if (courseRs.next()) {
             Course course = new Course(courseRs.getString("name"), courseRs.getString("subject"));
-            
+
             //Currently defaults to active if data in db is invalid
             int active = courseRs.getInt("active");
             if (active == 0) {
@@ -49,8 +49,7 @@ public class SqlCourseDao {
             } else if (active == 1) {
                 course.setActive(true);
             }
-            
-            
+
             int courseId = courseRs.getInt("id");
             course.addTaskTypes(taskDao.findTaskTypesOfACourse(course, courseId));
             courseRs.close();
@@ -65,6 +64,24 @@ public class SqlCourseDao {
 
     public List<Course> findAllCourses() throws SQLException {
         PreparedStatement coursesStmt = db.getConn().prepareStatement("SELECT * FROM Course");
+        ResultSet coursesRs = coursesStmt.executeQuery();
+
+        List<Course> foundCourses = new ArrayList<>();
+
+        while (coursesRs.next()) {
+            Course foundCourse = new Course(coursesRs.getString("name"), coursesRs.getString("subject"));
+            foundCourses.add(foundCourse);
+        }
+
+        coursesStmt.close();
+        coursesRs.close();
+
+        return foundCourses;
+    }
+
+    public List<Course> findAllCoursesByActive(int active) throws SQLException {
+        PreparedStatement coursesStmt = db.getConn().prepareStatement("SELECT * FROM Course WHERE Course.active = ?");
+        coursesStmt.setInt(1, active);
         ResultSet coursesRs = coursesStmt.executeQuery();
 
         List<Course> foundCourses = new ArrayList<>();
