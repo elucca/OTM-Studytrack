@@ -3,12 +3,9 @@ package otmstudytrack.main;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
-import java.net.URLDecoder;
 import otmstudytrack.database.SqlTaskTypeDao;
 import otmstudytrack.database.SqlCourseDao;
 import otmstudytrack.database.SqlTaskEntryDao;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Scanner;
 import otmstudytrack.domain.StudytrackService;
@@ -31,7 +28,7 @@ public class Main {
         SqlCourseDao courseDao = new SqlCourseDao(db, taskDao);
 
         //Init logic
-        StudytrackService service = new StudytrackService(courseDao, taskDao, entryDao);
+        StudytrackService service = new StudytrackService(db, courseDao, taskDao, entryDao);
 
         //Init UI
         Scanner reader = new Scanner(System.in);
