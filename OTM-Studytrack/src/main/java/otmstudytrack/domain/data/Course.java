@@ -39,7 +39,7 @@ public class Course {
         return this.subject;
     }
 
-    public boolean isActive() {
+    public boolean getActive() {
         return active;
     }
 
