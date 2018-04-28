@@ -6,19 +6,21 @@ import java.util.List;
 import otmstudytrack.domain.data.Course;
 
 /**
- * Data access object class for the Course data type. Connects to an SQLite database.
+ * Data access object class for the Course data type. Connects to an SQLite
+ * database.
  */
-
 public class SqlCourseDao {
 
     private Database db;
     private SqlTaskTypeDao taskDao;
 
     /**
-     * Constructs an SqlCourseDao which uses the provided Database-object for database
-     * connectivity. Requires an instance of a SqlTaskTypeDao which must connect to the
-     * same database as a dependency.
-     * @param db the Database object representing the database the dao is connected to
+     * Constructs an SqlCourseDao which uses the provided Database-object for
+     * database connectivity. Requires an instance of a SqlTaskTypeDao which
+     * must connect to the same database as a dependency.
+     *
+     * @param db the Database object representing the database the dao is
+     * connected to
      * @param taskDao the SqlTaskTypeDao dependency
      */
     public SqlCourseDao(Database db, SqlTaskTypeDao taskDao) {
@@ -27,9 +29,10 @@ public class SqlCourseDao {
     }
 
     /**
-     * Adds a course to the database. If the course already exists in the database
-     * (specifically, its object representation evaluates to equal), it is not added.
-     * 
+     * Adds a course to the database. If the course already exists in the
+     * database (specifically, its object representation evaluates to equal), it
+     * is not added.
+     *
      * @param course the Course to be added to the database
      * @throws SQLException if an invalid SQL statement is created
      */
@@ -46,9 +49,10 @@ public class SqlCourseDao {
 
     /**
      * Retrieves a course from the database by name.
-     * 
+     *
      * @param name the name of the course to find
-     * @return a Course object whose name field is equal to the provided parameter
+     * @return a Course object whose name field is equal to the provided
+     * parameter
      * @throws SQLException if an invalid SQL statement is created
      */
     public Course findCourseByName(String name) throws SQLException {
@@ -72,7 +76,9 @@ public class SqlCourseDao {
 
     /**
      * Retrieves all courses from the database.
-     * @return an ArrayList containing Course objects representing all existing courses
+     *
+     * @return an ArrayList containing Course objects representing all existing
+     * courses
      * @throws SQLException if an invalid SQL statement is created
      */
     public List<Course> findAllCourses() throws SQLException {
@@ -93,9 +99,9 @@ public class SqlCourseDao {
     }
 
     /**
-     * Removes a Course from the database if a course whose object representation
-     * evaluates to equal with the provided parameter exists.
-     * 
+     * Removes a Course from the database if a course whose object
+     * representation evaluates to equal with the provided parameter exists.
+     *
      * @param course the Course to be removed from the database
      * @return true if the Course was successfully removed
      * @throws SQLException if an invalid SQL statement is created
@@ -111,13 +117,34 @@ public class SqlCourseDao {
             removeStmt.close();
             return true;
         }
-        
+
         return false;
     }
-    
+
+    /**
+     * Sets the active field of the provided Course to 1 (true) or 0 (false).
+     * 
+     * @param course the course whose active-status is to be changed
+     * @param active the desired value of the active field: 1 (true) or 0 (false)
+     * @return true if the course's active status was succesfully assigned
+     * @throws SQLException if an invalid SQL statement is created
+     */
+    public boolean updateCourseActive(Course course, int active) throws SQLException {
+        PreparedStatement activateStmt = db.getConn().prepareStatement("UPDATE Course SET active = ? WHERE name = ?");
+        activateStmt.setInt(1, active);
+        activateStmt.setString(2, course.getName());
+        if (activateStmt.executeUpdate() == 0) {
+            activateStmt.close();
+            return false;
+        } else {
+            activateStmt.close();
+            return true;
+        }
+    }
+
     /**
      * Finds the database id of the course of the given name.
-     * 
+     *
      * @param name
      * @return the SQlite-generated unique integer id of the course
      * @throws SQLException if an invalid SQL statement is created
