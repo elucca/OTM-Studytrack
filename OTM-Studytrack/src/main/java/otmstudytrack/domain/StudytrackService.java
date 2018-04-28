@@ -33,7 +33,7 @@ public class StudytrackService {
         //Doesn't add duplicates
         Course foundCourse = courseDao.findCourseByName(courseName);
         if (foundCourse != null) {
-            int courseId = courseDao.findCourseID(foundCourse);
+            int courseId = courseDao.findCourseID(foundCourse.getName());
             if (taskDao.findTaskType(task, foundCourse, courseId) == null) {
                 taskDao.addTaskType(new TaskType(task, foundCourse), courseId);
                 return true;
@@ -49,7 +49,7 @@ public class StudytrackService {
         if (foundCourse == null) {
             return false;
         }
-        int foundCourseId = courseDao.findCourseID(foundCourse);
+        int foundCourseId = courseDao.findCourseID(foundCourse.getName());
 
         TaskType foundTaskType = taskDao.findTaskType(task, foundCourse, foundCourseId);
         if (foundTaskType == null) {
@@ -95,7 +95,7 @@ public class StudytrackService {
 
     public List<TaskEntry> getEntriesOfTaskType(String task, String course) throws SQLException {
         Course foundCourse = courseDao.findCourseByName(course);
-        int courseId = courseDao.findCourseID(foundCourse);
+        int courseId = courseDao.findCourseID(foundCourse.getName());
         return taskDao.findTaskType(task, foundCourse, courseId).getEntries();
     }
 
