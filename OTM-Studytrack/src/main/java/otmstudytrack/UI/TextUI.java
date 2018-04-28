@@ -220,15 +220,16 @@ public class TextUI {
                     }
                 }
             }
-            
+
             if (input == 15) {
                 System.out.print("ALL user data (courses, tasks and entries) will be permanently deleted. Are you sure? (y/n): ");
                 if (confirmYN()) {
                     service.removeAllData();
                     System.out.println("Data removed.");
+                } else {
+                    System.out.println("Operation aborted: No changes made.");
+                    System.out.println("");
                 }
-                System.out.println("Operation aborted: No changes made.");
-                System.out.println("");
             }
 
             if (input == 16) {

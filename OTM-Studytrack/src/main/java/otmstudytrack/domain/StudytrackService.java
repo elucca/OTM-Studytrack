@@ -19,6 +19,7 @@ public class StudytrackService {
     private SqlTaskEntryDao entryDao;
 
     public StudytrackService(Database db, SqlCourseDao courseDao, SqlTaskTypeDao taskDao, SqlTaskEntryDao entryDao) {
+        this.db = db;
         this.courseDao = courseDao;
         this.taskDao = taskDao;
         this.entryDao = entryDao;
