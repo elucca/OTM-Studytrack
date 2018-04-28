@@ -11,17 +11,16 @@ import otmstudytrack.domain.data.TaskType;
 public class TextUI {
 
     private Scanner reader;
-    private StudytrackService taskService;
+    private StudytrackService service;
 
     public TextUI(Scanner reader, StudytrackService service) {
         this.reader = reader;
-        this.taskService = service;
+        this.service = service;
     }
 
     public void start() throws SQLException {
         printOptions();
         handleInput();
-
     }
 
     private void handleInput() throws SQLException {
@@ -44,66 +43,123 @@ public class TextUI {
             if (input == 2) {
                 System.out.print("Input the subject of the course: ");
                 String subject = reader.nextLine();
-                
+
                 System.out.print("Input the name of the course:");
                 String name = reader.nextLine();
-                taskService.addCourse(name, subject);
+                service.addCourse(name, subject);
 
                 System.out.println("");
             }
 
             if (input == 3) {
-                System.out.print("Please input the name of the course the task belongs to: ");
+                System.out.print("Input the name of the course the task belongs to: ");
                 String courseName = reader.nextLine();
-                System.out.print("Please input the name of the new task: ");
+                System.out.print("Input the name of the new task: ");
                 String taskName = reader.nextLine();
 
-                if (taskService.addTaskType(taskName, courseName) == false) {
-                    System.out.println("Course not found: Task type not added.");
+                if (service.addTaskType(taskName, courseName) == false) {
+                    System.out.println("Course not found: Task not added.");
                 }
 
                 System.out.println("");
             }
 
             if (input == 4) {
-                System.out.print("Please input the name of the course the task belongs to: ");
+                System.out.print("Input the name of the course the entry is related to: ");
                 String courseName = reader.nextLine();
-                System.out.print("Please input the name of the task the entry is related to: ");
+                Course foundCourse = service.getCourse(courseName);
+                if (foundCourse == null) {
+                    System.out.println("Course not found: Entry not added.");
+                }
+
+                System.out.print("Input the name of the task the entry is related to: ");
                 String taskName = reader.nextLine();
-                System.out.print("Please input the course week the entry is related to: ");
+                if (!foundCourse.getTaskTypes().contains(new TaskType(taskName, foundCourse))) {
+                    System.out.println("Task not found: Entry not added.");
+                }
+
+                System.out.print("Input the course week the entry is related to: ");
                 int courseWeek = Integer.parseInt(reader.nextLine());
 
-                System.out.print("Please specify hours spent: ");
+                System.out.print("Specify hours spent: ");
                 int hours = Integer.parseInt(reader.nextLine());
-                System.out.print("Please specify minutes spent: ");
+                System.out.print("Specify minutes spent: ");
                 int minutes = Integer.parseInt(reader.nextLine());
 
-                taskService.addTaskEntry(courseWeek, taskName, courseName, hours, minutes);
+                service.addTaskEntry(courseWeek, taskName, courseName, hours, minutes);
 
                 System.out.println("");
             }
 
             if (input == 5) {
-                List<Course> courses = taskService.getCourses();
-                System.out.println("Courses:");
+                System.out.print("Input name of course to be removed: ");
+                String courseName = reader.nextLine();
+                if (service.setCourseActive(courseName, false)) {
+                    System.out.println("Course removed from active courses. Data retained in inactive courses.");
+                    System.out.println("");
+                } else {
+                    System.out.println("Course not found: Course not removed from active courses.");
+                    System.out.println("");
+                }
+            }
+
+            if (input == 6) {
+                System.out.print("The task and any related entires will be permanently deleted. Are you sure? (y/n): ");
+                if (confirmYN()) {
+                    System.out.print("Input name of the course the task belongs to: ");
+                    String courseName = reader.nextLine();
+                    System.out.print("Input name of the task to be removed: ");
+                    String taskName = reader.nextLine();
+
+                    if (service.removeTaskType(courseName, taskName)) {
+                        System.out.println("");
+                    } else {
+                        System.out.println("Task not found: Task not removed.");
+                        System.out.println("");
+                    }
+                } else {
+                    System.out.println("");
+                }
+
+            }
+
+            if (input == 7) {
+                System.out.print("The entry will be permanently deleted. Are you sure? (y/n): ");
+                if (confirmYN()) {
+                    System.out.print("Input the name of the course the entry relates to: ");
+                    String courseName = reader.nextLine();
+                    System.out.print("Input name of the task the entry is related to: ");
+                    String taskName = reader.nextLine();
+                    System.out.print("Input the course week the entry is related to: ");
+                    //Add check that it actually is an int, currently crashes if not
+                    int week = Integer.parseInt(reader.nextLine());
+                    service.removeTaskEntry(week, taskName, courseName);
+                } else {
+                    System.out.println("");
+                }
+            }
+
+            if (input == 8) {
+                List<Course> courses = service.getCoursesByActive(true);
+                System.out.println("Active courses:");
                 for (Course course : courses) {
                     System.out.println("  " + course.getName());
                 }
                 System.out.println("");
             }
 
-            if (input == 6) {
+            if (input == 9) {
                 //Should probably display time spent on each one to be actually useful
                 System.out.print("Please input the name of the course to list its tasks: ");
                 String course = reader.nextLine();
-                List<TaskType> tasks = taskService.getTaskTypesOfCourse(course);
+                List<TaskType> tasks = service.getTaskTypesOfCourse(course);
                 for (TaskType task : tasks) {
                     System.out.println(task.getName());
                 }
                 System.out.println("");
             }
 
-            if (input == 7) {
+            if (input == 10) {
                 //Printing the time spent duration is currently un-good, prints seconds
                 //Replace it with something better to print hours and minutes
                 //Parsing that possibly belongs to program logic and not UI
@@ -112,7 +168,7 @@ public class TextUI {
                 System.out.print("Please input the name of the task:  ");
                 String task = reader.nextLine();
 
-                List<TaskEntry> entries = taskService.getEntriesOfTaskType(task, course);
+                List<TaskEntry> entries = service.getEntriesOfTaskType(task, course);
                 for (TaskEntry entry : entries) {
                     System.out.println("Task: " + entry.getTaskType().getName() + ", time spent: " + entry.getTimeSpent().toString());
                 }
@@ -120,16 +176,62 @@ public class TextUI {
                 System.out.println("");
             }
 
-            if (input == 8) {
-                //Doesn't work, bug most likely elsewhere, will get caught in testing
+            if (input == 11) {
+                //Doesn't work
                 System.out.println("Please input the name of the course: ");
                 String course = reader.nextLine();
 
-                System.out.print("Time spent on " + course + ": " + taskService.getTimeSpentOnCourse(course));
+                System.out.print("Time spent on " + course + ": " + service.getTimeSpentOnCourse(course));
                 System.out.println("");
             }
 
-            if (input == 9) {
+            if (input == 12) {
+                List<Course> courses = service.getCoursesByActive(false);
+                System.out.println("Inactive courses:");
+                for (Course course : courses) {
+                    System.out.println("  " + course.getName());
+                }
+                System.out.println("");
+            }
+
+            if (input == 13) {
+                System.out.print("Input name of course to reactivate: ");
+                String courseName = reader.nextLine();
+                Course foundCourse = service.getCourse(courseName);
+                if (foundCourse.getActive()) {
+                    System.out.println("Course is already active. No changes made.");
+                    continue;
+                }
+
+                service.setCourseActive(courseName, true);
+                System.out.println("");
+            }
+
+            if (input == 14) {
+                System.out.print("The course along with all of its associated tasks and entries will be permanently deleted. Are you sure? (y/n): ");
+                if (confirmYN()) {
+                    System.out.print("Input the name of the course to remove: ");
+                    String courseName = reader.nextLine();
+                    if (service.removeCourse(courseName)) {
+                        System.out.println("Course removed.");
+                    } else {
+                        System.out.println("Course not found: No changes made.");
+                        System.out.println("");
+                    }
+                }
+            }
+            
+            if (input == 15) {
+                System.out.print("ALL user data (courses, tasks and entries) will be permanently deleted. Are you sure? (y/n): ");
+                if (confirmYN()) {
+                    service.removeAllData();
+                    System.out.println("Data removed.");
+                }
+                System.out.println("Operation aborted: No changes made.");
+                System.out.println("");
+            }
+
+            if (input == 16) {
                 break;
             }
         }
@@ -150,23 +252,55 @@ public class TextUI {
         System.out.println("  Input data:");
         System.out.println("    2. Add a new course");
         System.out.println("    3. Add a new task type to a course");
-        System.out.println("    4. Add a new entry for a task");
+        System.out.println("    4. Log an entry for a task");
+
+        System.out.println("");
+
+        System.out.println("  Remove data:");
+        System.out.println("    5. Remove course from active courses");
+        System.out.println("    6. Remove task from a course");
+        System.out.println("    7. Remove a log entry from a task");
 
         System.out.println("");
 
         System.out.println("  Display data:");
-        System.out.println("    5. List courses");
-        System.out.println("    6. List task types of a course");
-        System.out.println("    7. List the entries of a task");
-        System.out.println("    8. Display time spent on a course");
+        System.out.println("    8. List active courses");
+        System.out.println("    9. List task types of a course");
+        System.out.println("    10. List the entries of a task");
+        System.out.println("    11. Display time spent on a course");
 
         System.out.println("");
 
-        System.out.println("  9. Exit program");
+        System.out.println("  Administrative functions:");
+        System.out.println("    12. List inactive courses");
+        System.out.println("    13. Reactivate a course");
+        System.out.println("    14. Permanently remove a course");
+        System.out.println("    15. Permanently remove all data");
+
+        System.out.println("");
+
+        System.out.println("  16. Exit program");
 
         System.out.println("");
 
         System.out.println("Input: ");
+    }
+
+    private boolean confirmYN() {
+        while (true) {
+            char input = reader.nextLine().charAt(0);
+            if (input == 'y') {
+                System.out.println("");
+                return true;
+            }
+            if (input == 'n') {
+                System.out.println("");
+                return false;
+            }
+
+            System.out.print("Please input 'y' or 'n'.");
+            System.out.println("");
+        }
     }
 
 }

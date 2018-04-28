@@ -102,4 +102,56 @@ public class SqlCourseDaoTest {
         courseDao.addCourse(toAdd1);
         assertEquals(1, courseDao.findCourseID(toAdd1.getName()));
     }
+
+    @Test
+    public void courseActivitySetCorrectly() throws SQLException {
+        Course toAdd1 = new Course("IGP", "CS");
+        courseDao.addCourse(toAdd1);
+        assertTrue(courseDao.findCourseByName("IGP").getActive());
+        courseDao.updateCourseActive(toAdd1, 0);
+        assertFalse(courseDao.findCourseByName("IGP").getActive());
+        courseDao.updateCourseActive(toAdd1, 1);
+        assertTrue(courseDao.findCourseByName("IGP").getActive());
+    }
+
+    @Test
+    public void activeCoursesFound() throws SQLException {
+        Course toAdd1 = new Course("Tira", "CS");
+        Course toAdd2 = new Course("OTM", "CS");
+        Course toAdd3 = new Course("Todari", "Math");
+        courseDao.addCourse(toAdd1);
+        courseDao.addCourse(toAdd2);
+        courseDao.addCourse(toAdd3);
+        courseDao.updateCourseActive(toAdd3, 0);
+
+        Set<Course> correct = new HashSet<>();
+        correct.add(toAdd1);
+        correct.add(toAdd2);
+
+        Set<Course> found = new HashSet<>();
+        found.addAll(courseDao.findAllCoursesByActive(1));
+
+        assertEquals(found, correct);
+    }
+
+    @Test
+    public void inactiveCoursesFound() throws SQLException {
+        Course toAdd1 = new Course("Tira", "CS");
+        Course toAdd2 = new Course("OTM", "CS");
+        Course toAdd3 = new Course("Todari", "Math");
+        courseDao.addCourse(toAdd1);
+        courseDao.addCourse(toAdd2);
+        courseDao.addCourse(toAdd3);
+        courseDao.updateCourseActive(toAdd2, 0);
+        courseDao.updateCourseActive(toAdd3, 0);
+
+        Set<Course> correct = new HashSet<>();
+        correct.add(toAdd2);
+        correct.add(toAdd3);
+
+        Set<Course> found = new HashSet<>();
+        found.addAll(courseDao.findAllCoursesByActive(0));
+
+        assertEquals(found, correct);
+    }
 }

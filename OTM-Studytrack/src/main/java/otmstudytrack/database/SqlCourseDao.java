@@ -36,15 +36,23 @@ public class SqlCourseDao {
      * @param course the Course to be added to the database
      * @throws SQLException if an invalid SQL statement is created
      */
-    public void addCourse(Course course) throws SQLException {
+    public boolean addCourse(Course course) throws SQLException {
         if (findCourseByName(course.getName()) == null) {
             PreparedStatement stmt = db.getConn().prepareStatement("INSERT INTO Course (name, subject, active) VALUES (?, ?, ?)");
             stmt.setString(1, course.getName());
             stmt.setString(2, course.getSubject());
-            stmt.setInt(2, 1);
+
+            int active = 1;
+            if (course.getActive() == false) {
+                active = 0;
+            }
+            stmt.setInt(3, active);
+
             stmt.execute();
             stmt.close();
+            return true;
         }
+        return false;
     }
 
     /**
@@ -62,6 +70,15 @@ public class SqlCourseDao {
 
         if (courseRs.next()) {
             Course course = new Course(courseRs.getString("name"), courseRs.getString("subject"));
+
+            //Currently defaults to active if data in db is invalid
+            int active = courseRs.getInt("active");
+            if (active == 0) {
+                course.setActive(false);
+            } else if (active == 1) {
+                course.setActive(true);
+            }
+
             int courseId = courseRs.getInt("id");
             course.addTaskTypes(taskDao.findTaskTypesOfACourse(course, courseId));
             courseRs.close();
@@ -83,6 +100,31 @@ public class SqlCourseDao {
      */
     public List<Course> findAllCourses() throws SQLException {
         PreparedStatement coursesStmt = db.getConn().prepareStatement("SELECT * FROM Course");
+        ResultSet coursesRs = coursesStmt.executeQuery();
+
+        List<Course> foundCourses = new ArrayList<>();
+
+        while (coursesRs.next()) {
+            Course foundCourse = new Course(coursesRs.getString("name"), coursesRs.getString("subject"));
+            foundCourses.add(foundCourse);
+        }
+
+        coursesStmt.close();
+        coursesRs.close();
+
+        return foundCourses;
+    }
+
+    /**
+     * Retrieves all courses from the database which have the provided active status.
+     * 
+     * @param active specifies whether to find active (1) or inactive (0) courses
+     * @return an ArrayList containing all courses with the provided active status
+     * @throws SQLException SQLException if an invalid SQL statement is created
+     */
+    public List<Course> findAllCoursesByActive(int active) throws SQLException {
+        PreparedStatement coursesStmt = db.getConn().prepareStatement("SELECT * FROM Course WHERE Course.active = ?");
+        coursesStmt.setInt(1, active);
         ResultSet coursesRs = coursesStmt.executeQuery();
 
         List<Course> foundCourses = new ArrayList<>();
@@ -123,10 +165,11 @@ public class SqlCourseDao {
 
     /**
      * Sets the active field of the provided Course to 1 (true) or 0 (false).
-     * 
+     *
      * @param course the course whose active-status is to be changed
-     * @param active the desired value of the active field: 1 (true) or 0 (false)
-     * @return true if the course's active status was succesfully assigned
+     * @param active the desired value of the active field: 1 (true) or 0
+     * (false)
+     * @return true if the course's active status was successfully assigned
      * @throws SQLException if an invalid SQL statement is created
      */
     public boolean updateCourseActive(Course course, int active) throws SQLException {
