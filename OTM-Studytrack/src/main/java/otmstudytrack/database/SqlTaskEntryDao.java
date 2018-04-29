@@ -193,12 +193,12 @@ public class SqlTaskEntryDao {
         removeStmt.execute();
         removeStmt.close();
     }
-    
+
     private void appendDurationToTaskEntry(TaskEntry taskEntry, TaskType taskType, int taskTypeId, int courseWeek) throws SQLException {
         TaskEntry found = findTaskEntry(taskType, taskTypeId, courseWeek);
         Duration existingTimeSpent = found.getTimeSpent();
         Duration newTimeSpent = existingTimeSpent.plus(taskEntry.getTimeSpent());
-        
+
         PreparedStatement appendStmt = db.getConn().prepareStatement("UPDATE TaskEntry SET timeSpent = ?"
                 + " WHERE taskType_id = ? AND courseWeek = ?");
         appendStmt.setLong(1, newTimeSpent.getSeconds());

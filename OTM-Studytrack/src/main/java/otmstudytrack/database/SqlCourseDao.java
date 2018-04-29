@@ -16,8 +16,8 @@ public class SqlCourseDao {
 
     /**
      * Constructs an SqlCourseDao which uses the provided Database object for
-     * database connectivity. Requires as a dependency an instance of a SqlTaskTypeDao
-     * which must use the same Database object.
+     * database connectivity. Requires as a dependency an instance of a
+     * SqlTaskTypeDao which must use the same Database object.
      *
      * @param db the Database object representing the database the dao is
      * connected to
@@ -43,7 +43,7 @@ public class SqlCourseDao {
             stmt.setString(2, course.getSubject());
 
             int active = 1;
-            if (course.getActive() == false) {
+            if (course.isActive() == false) {
                 active = 0;
             }
             stmt.setInt(3, active);
@@ -116,10 +116,13 @@ public class SqlCourseDao {
     }
 
     /**
-     * Retrieves all courses from the database which have the provided active status.
-     * 
-     * @param active specifies whether to find active (1) or inactive (0) courses
-     * @return an ArrayList containing all courses with the provided active status
+     * Retrieves all courses from the database which have the provided active
+     * status.
+     *
+     * @param active specifies whether to find active (1) or inactive (0)
+     * courses
+     * @return an ArrayList containing all courses with the provided active
+     * status
      * @throws SQLException SQLException if an invalid SQL statement is created
      */
     public List<Course> findAllCoursesByActive(int active) throws SQLException {

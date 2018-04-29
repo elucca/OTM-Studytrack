@@ -198,7 +198,7 @@ public class TextUI {
                 System.out.print("Input name of course to reactivate: ");
                 String courseName = reader.nextLine();
                 Course foundCourse = service.getCourse(courseName);
-                if (foundCourse.getActive()) {
+                if (foundCourse.isActive()) {
                     System.out.println("Course is already active. No changes made.");
                     continue;
                 }

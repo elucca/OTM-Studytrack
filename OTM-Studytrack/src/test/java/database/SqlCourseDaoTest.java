@@ -107,11 +107,11 @@ public class SqlCourseDaoTest {
     public void courseActivitySetCorrectly() throws SQLException {
         Course toAdd1 = new Course("IGP", "CS");
         courseDao.addCourse(toAdd1);
-        assertTrue(courseDao.findCourseByName("IGP").getActive());
+        assertTrue(courseDao.findCourseByName("IGP").isActive());
         courseDao.updateCourseActive(toAdd1, 0);
-        assertFalse(courseDao.findCourseByName("IGP").getActive());
+        assertFalse(courseDao.findCourseByName("IGP").isActive());
         courseDao.updateCourseActive(toAdd1, 1);
-        assertTrue(courseDao.findCourseByName("IGP").getActive());
+        assertTrue(courseDao.findCourseByName("IGP").isActive());
     }
 
     @Test

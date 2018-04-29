@@ -17,8 +17,8 @@ public class SqlTaskTypeDao {
 
     /**
      * Constructs an SqlTaskTypeDao which uses the provided Database object for
-     * database connectivity. Requires as a dependency an instance of a SqlTaskEntryDao
-     * which must use the same Database object.
+     * database connectivity. Requires as a dependency an instance of a
+     * SqlTaskEntryDao which must use the same Database object.
      *
      * @param db the Database object representing the database the dao is
      * connected to
@@ -31,11 +31,12 @@ public class SqlTaskTypeDao {
 
     /**
      * Adds a TaskType to the database which will be associated with the Course
-     * which has the provided database id. The calling class will typically obtain
-     * the id from an instance of SqlCourseDao.
-     * 
+     * which has the provided database id. The calling class will typically
+     * obtain the id from an instance of SqlCourseDao.
+     *
      * @param taskType the TaskType to be added to the database
-     * @param courseId the database id of the course the TaskType is associated with
+     * @param courseId the database id of the course the TaskType is associated
+     * with
      * @throws SQLException if an invalid SQL statement is created
      */
     public void addTaskType(TaskType taskType, int courseId) throws SQLException {
@@ -50,11 +51,12 @@ public class SqlTaskTypeDao {
 
     /**
      * Adds multiple TaskTypes which which will be associated with the course
-     * which has the provided database id. The calling class will typically obtain
-     * the id from an instance of SqlCourseDao.
-     * 
+     * which has the provided database id. The calling class will typically
+     * obtain the id from an instance of SqlCourseDao.
+     *
      * @param taskTypes a list containing TaskType objects
-     * @param courseId the database id of the course the TaskType is associated with
+     * @param courseId the database id of the course the TaskType is associated
+     * with
      * @throws SQLException if an invalid SQL statement is created
      */
     public void addTaskTypes(List<TaskType> taskTypes, int courseId) throws SQLException {
@@ -64,13 +66,14 @@ public class SqlTaskTypeDao {
     }
 
     /**
-     * Retrieves a TaskType object from the database associated with the provided
-     * Course which has the provided database id. The calling class will typically obtain
-     * the id from an instance of SqlCourseDao.
-     * 
+     * Retrieves a TaskType object from the database associated with the
+     * provided Course which has the provided database id. The calling class
+     * will typically obtain the id from an instance of SqlCourseDao.
+     *
      * @param name the name of the TaskType
      * @param course the Course object the TaskType is associated with
-     * @param courseId the database id of the course the TaskType is associated with
+     * @param courseId the database id of the course the TaskType is associated
+     * with
      * @return the retrieved TaskType object, or null if it was not found
      * @throws SQLException if an invalid SQL statement is created
      */
@@ -98,12 +101,14 @@ public class SqlTaskTypeDao {
     }
 
     /**
-     * Retrieves all TaskTypes associated with the provided Course and its provided
-     * database id. The calling class will typically obtain the id from an instance
-     * of SqlCourseDao.
-     * 
-     * @param course the Course the TaskTypes to be retrieved are associated with
-     * @param courseId the database id of the course the TaskType is associated with
+     * Retrieves all TaskTypes associated with the provided Course and its
+     * provided database id. The calling class will typically obtain the id from
+     * an instance of SqlCourseDao.
+     *
+     * @param course the Course the TaskTypes to be retrieved are associated
+     * with
+     * @param courseId the database id of the course the TaskType is associated
+     * with
      * @return an ArrayList containing the retrieved TaskType objects
      * @throws SQLException if an invalid SQL statement is created
      */
@@ -122,12 +127,13 @@ public class SqlTaskTypeDao {
 
         return foundTasks;
     }
-    
+
     /**
      * Retrieves the database id of the provided TaskType.
-     * 
+     *
      * @param taskType the TaskType whose id is to be retrieved
-     * @return the id of the TaskType provided, or -1 if it does not exist in the database
+     * @return the id of the TaskType provided, or -1 if it does not exist in
+     * the database
      * @throws SQLException if an invalid SQL statement is created
      */
     public int findTaskTypeId(TaskType taskType) throws SQLException {
@@ -148,12 +154,13 @@ public class SqlTaskTypeDao {
     }
 
     /**
-     * Removes the provided TaskType associated associated with the Course with the
-     * given database id from the database. The calling class will typically obtain
-     * the id from an instance of SqlCourseDao.
-     * 
+     * Removes the provided TaskType associated associated with the Course with
+     * the given database id from the database. The calling class will typically
+     * obtain the id from an instance of SqlCourseDao.
+     *
      * @param taskType the TaskType object to be removed
-     * @param courseId database id of the Course the TaskType object is associated with
+     * @param courseId database id of the Course the TaskType object is
+     * associated with
      * @throws SQLException if an invalid SQL statement is created
      */
     public void removeTaskType(TaskType taskType, int courseId) throws SQLException {
@@ -165,11 +172,12 @@ public class SqlTaskTypeDao {
     }
 
     /**
-     * Removes all TaskTypes associated associated with the Course with the given
-     * database id from the database. The calling class will typically obtain the
-     * id from an instance of SqlCourseDao.
-     * 
-     * @param courseId database id of the Course the TaskType objects are associated with
+     * Removes all TaskTypes associated associated with the Course with the
+     * given database id from the database. The calling class will typically
+     * obtain the id from an instance of SqlCourseDao.
+     *
+     * @param courseId database id of the Course the TaskType objects are
+     * associated with
      * @throws SQLException if an invalid SQL statement is created
      */
     public void removeAllTaskTypesOfCourse(int courseId) throws SQLException {
