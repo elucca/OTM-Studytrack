@@ -14,3 +14,4 @@
 | 24.4.2018     | 1h 40m        |  Performed bugfixing and testing and made first release                   |
 |Total time:    | 38h 50m       |                                                                           |
 | 26.4.2018     | 5h 22m        |  Implemented new features to UI along and to courses                      |
+| 28.4.2018     | 1h 30m        |  Began creating Javadoc documentation                                     |
