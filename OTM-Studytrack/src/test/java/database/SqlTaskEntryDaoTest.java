@@ -89,7 +89,7 @@ public class SqlTaskEntryDaoTest {
         TaskType taskOfEntry = new TaskType("TMC", new Course("Tira", "CS"));
         TaskEntry toAdd = new TaskEntry(new Date(), 2, taskOfEntry, Duration.ZERO);
         entryDao.addTaskEntry(toAdd, 1);
-        entryDao.removeTaskEntry(toAdd, 1);
+        entryDao.removeTaskEntry(toAdd, 1, 1);
 
         assertNull(entryDao.findTaskEntry(taskOfEntry, 1, 2));
     }

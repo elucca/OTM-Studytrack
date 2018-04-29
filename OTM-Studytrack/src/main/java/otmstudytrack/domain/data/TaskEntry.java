@@ -7,7 +7,7 @@ import java.util.Objects;
 public class TaskEntry {
     
     private final Date date;
-    private final Duration timeSpent;
+    private Duration timeSpent;
     private final int courseWeek;
     private final TaskType taskType;
     
@@ -62,6 +62,8 @@ public class TaskEntry {
         }
         return true;
     }
+
+
     
 
     

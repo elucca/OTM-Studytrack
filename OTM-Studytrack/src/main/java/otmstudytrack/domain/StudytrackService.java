@@ -105,7 +105,7 @@ public class StudytrackService {
         int foundTaskId = taskDao.findTaskTypeId(foundTaskType);
 
         //Doesn't properly check if removal was successful
-        entryDao.removeTaskEntry(new TaskEntry(new Date(), courseWeek, foundTaskType, Duration.ZERO), foundTaskId);
+        entryDao.removeTaskEntry(new TaskEntry(new Date(), courseWeek, foundTaskType, Duration.ZERO), foundTaskId, courseWeek);
         return true;
     }
 
