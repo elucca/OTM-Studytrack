@@ -15,9 +15,9 @@ public class SqlCourseDao {
     private SqlTaskTypeDao taskDao;
 
     /**
-     * Constructs an SqlCourseDao which uses the provided Database-object for
-     * database connectivity. Requires an instance of a SqlTaskTypeDao which
-     * must connect to the same database as a dependency.
+     * Constructs an SqlCourseDao which uses the provided Database object for
+     * database connectivity. Requires as a dependency an instance of a SqlTaskTypeDao
+     * which must use the same Database object.
      *
      * @param db the Database object representing the database the dao is
      * connected to
@@ -186,7 +186,7 @@ public class SqlCourseDao {
     }
 
     /**
-     * Finds the database id of the course of the given name.
+     * Retrieves the database id of the course of the given name.
      *
      * @param name
      * @return the SQlite-generated unique integer id of the course
