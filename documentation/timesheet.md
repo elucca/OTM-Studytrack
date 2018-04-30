@@ -15,4 +15,5 @@
 |Total time:    | 38h 50m       |                                                                           |
 | 26.4.2018     | 5h 22m        |  Implemented new features to UI along and to courses                      |
 | 28.4.2018     | 1h 30m        |  Began creating Javadoc documentation                                     |
-| 30.4.2018     | 3h 45m        |  Worked on more documentation, changed task entry feature                 |
+| 29.4.2018     | 3h 45m        |  Worked on more documentation, changed task entry feature                 |
+| 30.4.2018     | 2h 55m        |  Wrote manual and architecture description; implemented new tests         |
