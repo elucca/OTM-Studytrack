@@ -1,4 +1,4 @@
-package otmstudytrack.UI;
+package otmstudytrack.ui;
 
 import java.sql.SQLException;
 import java.util.List;

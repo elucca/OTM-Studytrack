@@ -11,8 +11,8 @@ import java.util.Objects;
 public class TaskType {
 
     private String name;
-    private List<TaskEntry> entries;
     private Course belongsToCourse;
+    private List<TaskEntry> entries;
 
     /**
      * Constructs a task type with the provided name related to the provided
@@ -122,7 +122,7 @@ public class TaskType {
     /**
      * Returns a string representation of this TaskType, including its name and
      * the course it relates to.
-     * 
+     *
      * @return a string representation of the TaskType
      */
     @Override

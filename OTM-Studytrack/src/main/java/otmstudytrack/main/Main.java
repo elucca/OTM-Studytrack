@@ -9,7 +9,7 @@ import otmstudytrack.database.SqlTaskEntryDao;
 import java.sql.SQLException;
 import java.util.Scanner;
 import otmstudytrack.domain.StudytrackService;
-import otmstudytrack.UI.TextUI;
+import otmstudytrack.ui.TextUI;
 import otmstudytrack.database.Database;
 
 public class Main {
