@@ -37,10 +37,12 @@ public class SqlTaskEntryDao {
      * @param taskEntry the TaskEntry to be added to the database
      * @param taskTypeId the database id of the TaskType the TaskEntry is
      * associated with
+     * @return true if the TaskEntry was added, false if it wasn't (but time was
+     * appended to an existing entry
      * @throws SQLException if an invalid SQL statement is created
      */
-    public void addTaskEntry(TaskEntry taskEntry, int taskTypeId) throws SQLException {
-        if (findTaskEntry(taskEntry.getTaskType(), taskTypeId, taskTypeId) == null) {
+    public boolean addTaskEntry(TaskEntry taskEntry, int taskTypeId) throws SQLException {
+        if (findTaskEntry(taskEntry.getTaskType(), taskTypeId, taskEntry.getCourseWeek()) == null) {
             PreparedStatement entryStmt = db.getConn().prepareStatement("INSERT INTO TaskEntry (date, timespent, courseweek, tasktype_id) "
                     + "VALUES (?,?,?,?)");
             entryStmt.setLong(1, taskEntry.getDate().getTime());
@@ -50,8 +52,10 @@ public class SqlTaskEntryDao {
             entryStmt.setInt(4, taskTypeId);
             entryStmt.execute();
             entryStmt.close();
+            return true;
         } else {
             appendDurationToTaskEntry(taskEntry, taskEntry.getTaskType(), taskTypeId, taskEntry.getCourseWeek());
+            return false;
         }
     }
 
@@ -122,42 +126,6 @@ public class SqlTaskEntryDao {
         return foundEntries;
     }
 
-    @Deprecated
-    /**
-     * Retrieves all TaskEntry objects from the database associated with the
-     * provided course week and the provided TaskType which has the provided
-     * database id. The calling class will typically obtain the id from an
-     * instance of SqlTaskTypeDao.
-     *
-     * @param taskType the TaskType the TaskEntries to be retrieved are
-     * associated with
-     * @param taskTypeId the database id of the TaskType the TaskEntries to be
-     * retrieved are associated with
-     * @param courseWeek the courseWeek field of the TaskEntries to be retrieved
-     * @return an ArrayList of TaskEntries associated with the provided TaskType
-     * and course week, or an empty ArrayList if none are found
-     * @throws SQLException if an invalid SQL statement is created
-     */
-    public List<TaskEntry> findEntriesOfATypeFromCourseWeek(TaskType taskType, int taskTypeId, int courseWeek) throws SQLException {
-        PreparedStatement entriesStmt = db.getConn().prepareStatement("SELECT * FROM TaskEntry WHERE TaskEntry.courseweek = ?"
-                + "AND TaskEntry.tasktype_id = ?");
-        entriesStmt.setInt(1, courseWeek);
-        entriesStmt.setInt(2, taskTypeId);
-        ResultSet entriesRs = entriesStmt.executeQuery();
-
-        List<TaskEntry> foundEntries = new ArrayList<>();
-        while (entriesRs.next()) {
-            Date date = entriesRs.getDate("date");
-            Duration timeSpent = Duration.ofSeconds(entriesRs.getLong("timespent"));
-            foundEntries.add(new TaskEntry(date, courseWeek, taskType, timeSpent));
-        }
-
-        entriesStmt.close();
-        entriesRs.close();
-
-        return foundEntries;
-    }
-
     /**
      * Removes the provided TaskEntry associated with the given course week and
      * TaskType from the database. The calling class will typically obtain the
@@ -199,11 +167,12 @@ public class SqlTaskEntryDao {
         Duration existingTimeSpent = found.getTimeSpent();
         Duration newTimeSpent = existingTimeSpent.plus(taskEntry.getTimeSpent());
 
-        PreparedStatement appendStmt = db.getConn().prepareStatement("UPDATE TaskEntry SET timeSpent = ?"
-                + " WHERE taskType_id = ? AND courseWeek = ?");
+        PreparedStatement appendStmt = db.getConn().prepareStatement("UPDATE TaskEntry SET timeSpent = ? WHERE taskType_id = ? AND courseWeek = ?");
         appendStmt.setLong(1, newTimeSpent.getSeconds());
         appendStmt.setInt(2, taskTypeId);
         appendStmt.setInt(3, courseWeek);
+        appendStmt.execute();
+        appendStmt.close();
     }
 
 }

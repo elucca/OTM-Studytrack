@@ -37,7 +37,7 @@
                 <version>0.8.0</version>
                 <configuration>
                     <excludes>
-                        <exclude>otmstudytrack/UI/*</exclude>
+                        <exclude>otmstudytrack/ui/*</exclude>
                         <exclude>otmstudytrack/database/deprecated/*</exclude>
                     </excludes>
                 </configuration>

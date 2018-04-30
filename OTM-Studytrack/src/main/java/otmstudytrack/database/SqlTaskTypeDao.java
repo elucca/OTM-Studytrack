@@ -42,6 +42,7 @@ public class SqlTaskTypeDao {
     public void addTaskType(TaskType taskType, int courseId) throws SQLException {
         //Currently allows adding TaskTypes to nonexistent courses. Doesn't break
         //anything, but can result in spurious database entries.
+        //Should also not insert duplicates.
         PreparedStatement taskStmt = db.getConn().prepareStatement("INSERT INTO TaskType (name, course_id) VALUES (?, ?)");
         taskStmt.setString(1, taskType.getName());
         taskStmt.setInt(2, courseId);

@@ -44,6 +44,30 @@ public class SqlTaskEntryDaoTest {
 
         assertEquals(toAdd, entryDao.findTaskEntry(taskOfEntry, 1, 2));
     }
+    
+    @Test
+    public void nonexistentEntryReturnsNull() throws SQLException {
+        assertNull(entryDao.findTaskEntry(new TaskType("Doesn't", new Course("exist", ",fool")), 2, 3));
+    }
+    
+    @Test
+    public void duplicateEntryNotAdded() throws SQLException {
+        TaskType taskOfEntry = new TaskType("TMC", new Course("Tira", "CS"));
+        TaskEntry toAdd = new TaskEntry(new Date(), 2, taskOfEntry, Duration.ZERO);
+        entryDao.addTaskEntry(toAdd, 1);
+        
+        assertFalse(entryDao.addTaskEntry(toAdd, 1));
+    }
+    
+    @Test
+    public void timeAppendedToExistingEntry() throws SQLException {
+        TaskType taskOfEntry = new TaskType("TMC", new Course("Tira", "CS"));
+        TaskEntry toAdd = new TaskEntry(new Date(), 2, taskOfEntry, Duration.ofSeconds(20));
+        entryDao.addTaskEntry(toAdd, 1);
+        entryDao.addTaskEntry(toAdd, 1);
+        
+        assertEquals(40, entryDao.findTaskEntry(taskOfEntry, 1, 2).getTimeSpent().getSeconds(), 1);
+    }
 
     @Test
     public void entriesOfTaskTypeFoundCorrectly() throws SQLException {
@@ -62,26 +86,6 @@ public class SqlTaskEntryDaoTest {
 
         assertTrue(correctEntries.containsAll(entryDao.findEntriesOfAType(taskOfEntry, 1)));
         assertTrue(entryDao.findEntriesOfAType(taskOfEntry, 1).containsAll(correctEntries));
-    }
-
-    @Test
-    public void entriesOfCourseWeekFoundCorrectly() throws SQLException {
-        TaskType taskOfEntry = new TaskType("TMC", new Course("Tira", "CS"));
-        TaskEntry toAdd1 = new TaskEntry(new Date(), 2, taskOfEntry, Duration.ZERO);
-        TaskEntry toAdd2 = new TaskEntry(new Date(), 2, taskOfEntry, Duration.ZERO);
-        TaskEntry toAdd3 = new TaskEntry(new Date(), 1, taskOfEntry, Duration.ZERO);
-        entryDao.addTaskEntry(toAdd1, 1);
-        entryDao.addTaskEntry(toAdd2, 1);
-        entryDao.addTaskEntry(toAdd3, 1);
-
-        List<TaskEntry> correctEntries = new ArrayList<>();
-        correctEntries.add(toAdd1);
-        correctEntries.add(toAdd2);
-
-        List<TaskEntry> foundEntries = entryDao.findEntriesOfATypeFromCourseWeek(taskOfEntry, 1, 2);
-
-        assertTrue(correctEntries.containsAll(foundEntries));
-        assertTrue(foundEntries.containsAll(correctEntries));
     }
 
     @Test
