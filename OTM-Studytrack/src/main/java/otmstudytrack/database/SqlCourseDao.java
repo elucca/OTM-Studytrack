@@ -79,12 +79,10 @@ public class SqlCourseDao {
                 course.setActive(true);
             }
 
-            int courseId = courseRs.getInt("id");
-            course.addTaskTypes(taskDao.findTaskTypesOfACourse(course, courseId));
+            course.addTaskTypes(taskDao.findTaskTypesOfACourse(course, courseRs.getInt("id")));
             courseRs.close();
             return course;
         }
-
         courseRs.close();
         courseStmt.close();
 
