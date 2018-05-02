@@ -3,6 +3,7 @@ package otmstudytrack.database.deprecated;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import otmstudytrack.database.deprecated.FakeTaskEntryDao;
 import otmstudytrack.domain.data.Course;
 import otmstudytrack.domain.data.TaskType;
 

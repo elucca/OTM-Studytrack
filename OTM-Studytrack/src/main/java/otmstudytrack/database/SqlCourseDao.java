@@ -9,10 +9,10 @@ import otmstudytrack.domain.data.Course;
  * Data access object class for the Course data type. Connects to an SQLite
  * database.
  */
-public class SqlCourseDao {
+public class SqlCourseDao implements CourseDao {
 
     private Database db;
-    private SqlTaskTypeDao taskDao;
+    private TaskTypeDao taskDao;
 
     /**
      * Constructs an SqlCourseDao which uses the provided Database object for
@@ -23,7 +23,7 @@ public class SqlCourseDao {
      * connected to
      * @param taskDao the SqlTaskTypeDao dependency
      */
-    public SqlCourseDao(Database db, SqlTaskTypeDao taskDao) {
+    public SqlCourseDao(Database db, TaskTypeDao taskDao) {
         this.db = db;
         this.taskDao = taskDao;
     }

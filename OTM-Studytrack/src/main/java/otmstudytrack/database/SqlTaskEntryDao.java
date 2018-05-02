@@ -11,7 +11,7 @@ import otmstudytrack.domain.data.TaskType;
  * Data access object class for the TaskType data type. Connects to an SQLite
  * database.
  */
-public class SqlTaskEntryDao {
+public class SqlTaskEntryDao implements TaskEntryDao {
 
     private Database db;
 

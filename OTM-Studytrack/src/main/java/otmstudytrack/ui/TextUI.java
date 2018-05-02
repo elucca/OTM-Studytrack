@@ -44,7 +44,7 @@ public class TextUI {
                 System.out.print("Input the subject of the course: ");
                 String subject = reader.nextLine();
 
-                System.out.print("Input the name of the course:");
+                System.out.print("Input the name of the course: ");
                 String name = reader.nextLine();
                 service.addCourse(name, subject);
 
@@ -149,7 +149,6 @@ public class TextUI {
             }
 
             if (input == 9) {
-                //Should probably display time spent on each one to be actually useful
                 System.out.print("Please input the name of the course to list its tasks: ");
                 String course = reader.nextLine();
                 List<TaskType> tasks = service.getTaskTypesOfCourse(course);
@@ -160,15 +159,12 @@ public class TextUI {
             }
 
             if (input == 10) {
-                //Printing the time spent duration is currently un-good, prints seconds
-                //Replace it with something better to print hours and minutes
-                //Parsing that possibly belongs to program logic and not UI
-                System.out.print("Please input the name of the course:  ");
+                System.out.print("Please input the name of the course: ");
                 String course = reader.nextLine();
-                System.out.print("Please input the name of the task:  ");
+                System.out.print("Please input the name of the task: ");
                 String task = reader.nextLine();
 
-                List<TaskEntry> entries = service.getEntriesOfTaskType(task, course);
+                List<TaskEntry> entries = service.getTaskType(task, course).getEntries();
                 for (TaskEntry entry : entries) {
                     System.out.println("Task: " + entry.getTaskType().getName() + ", time spent: " + entry.getTimeSpent().toString());
                 }
@@ -181,7 +177,7 @@ public class TextUI {
                 System.out.println("Please input the name of the course: ");
                 String course = reader.nextLine();
 
-                System.out.print("Time spent on " + course + ": " + service.getTimeSpentOnCourse(course));
+                System.out.print("Time spent on " + course + ": " + service.getTimeSpentOnCourse(course).toString());
                 System.out.println("");
             }
 
@@ -228,8 +224,9 @@ public class TextUI {
                     System.out.println("Data removed.");
                 } else {
                     System.out.println("Operation aborted: No changes made.");
-                    System.out.println("");
+
                 }
+                System.out.println("");
             }
 
             if (input == 16) {

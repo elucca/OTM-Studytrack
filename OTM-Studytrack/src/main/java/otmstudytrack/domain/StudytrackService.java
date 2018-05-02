@@ -14,11 +14,11 @@ import otmstudytrack.domain.data.TaskType;
 public class StudytrackService {
 
     private Database db;
-    private SqlCourseDao courseDao;
-    private SqlTaskTypeDao taskDao;
-    private SqlTaskEntryDao entryDao;
+    private CourseDao courseDao;
+    private TaskTypeDao taskDao;
+    private TaskEntryDao entryDao;
 
-    public StudytrackService(Database db, SqlCourseDao courseDao, SqlTaskTypeDao taskDao, SqlTaskEntryDao entryDao) {
+    public StudytrackService(Database db, CourseDao courseDao, TaskTypeDao taskDao, TaskEntryDao entryDao) {
         this.db = db;
         this.courseDao = courseDao;
         this.taskDao = taskDao;
@@ -112,7 +112,7 @@ public class StudytrackService {
     public void addCourse(String name, String subject) throws SQLException {
         courseDao.addCourse(new Course(name, subject));
     }
-    
+
     public boolean removeCourse(String name) throws SQLException {
         return courseDao.removeCourse(new Course(name, ""));
     }
@@ -148,15 +148,18 @@ public class StudytrackService {
     }
 
     public Duration getTimeSpentOnCourse(String course) throws SQLException {
-        List<TaskType> foundTasks = courseDao.findCourseByName(course).getTaskTypes();
+        List<TaskType> foundTasks = getTaskTypesOfCourse(course);
         Duration timeSpent = Duration.ZERO;
-
+        
         for (TaskType task : foundTasks) {
             List<TaskEntry> entries = task.getEntries();
+            //entries size is 0, why?
             for (TaskEntry entry : entries) {
                 timeSpent.plus(entry.getTimeSpent());
             }
         }
+
+        System.out.println("Duration: " + timeSpent);
 
         return timeSpent;
     }
@@ -170,12 +173,6 @@ public class StudytrackService {
         return foundCourse.getTaskTypes();
     }
 
-    public List<TaskEntry> getEntriesOfTaskType(String task, String course) throws SQLException {
-        Course foundCourse = courseDao.findCourseByName(course);
-        int courseId = courseDao.findCourseID(foundCourse.getName());
-        return taskDao.findTaskType(task, foundCourse, courseId).getEntries();
-    }
-    
     public void removeAllData() throws SQLException {
         this.db.deleteAllData();
     }
