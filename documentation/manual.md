@@ -1,6 +1,6 @@
 # User manual
 
-## Acquiring and running program
+## Acquiring and running the program
 
 The newest release (and all previous releases) can be found at the ![Releases page](https://github.com/elucca/OTM-Studytrack/releases)
 
