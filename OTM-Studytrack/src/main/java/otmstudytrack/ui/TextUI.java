@@ -173,7 +173,6 @@ public class TextUI {
             }
 
             if (input == 11) {
-                //Doesn't work
                 System.out.println("Please input the name of the course: ");
                 String course = reader.nextLine();
 

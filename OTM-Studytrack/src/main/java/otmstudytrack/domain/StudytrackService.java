@@ -3,6 +3,7 @@ package otmstudytrack.domain;
 import otmstudytrack.database.*;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
@@ -84,7 +85,7 @@ public class StudytrackService {
         Duration hoursDuration = Duration.ofHours(hours);
         Duration minutesDuration = Duration.ofMinutes(minutes);
         Duration fullDuration = hoursDuration.plus(minutesDuration);
-
+        
         Date date = new Date();
         entryDao.addTaskEntry(new TaskEntry(date, courseWeek, foundTaskType, fullDuration), foundTaskId);
         return true;
@@ -153,13 +154,10 @@ public class StudytrackService {
         
         for (TaskType task : foundTasks) {
             List<TaskEntry> entries = task.getEntries();
-            //entries size is 0, why?
             for (TaskEntry entry : entries) {
-                timeSpent.plus(entry.getTimeSpent());
+                timeSpent = timeSpent.plus(entry.getTimeSpent());
             }
         }
-
-        System.out.println("Duration: " + timeSpent);
 
         return timeSpent;
     }

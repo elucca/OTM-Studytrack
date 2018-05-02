@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -79,13 +81,14 @@ public class SqlTaskEntryDaoTest {
         entryDao.addTaskEntry(toAdd1, 1);
         entryDao.addTaskEntry(toAdd2, 1);
         entryDao.addTaskEntry(toAdd3, 1);
-
-        List<TaskEntry> correctEntries = new ArrayList<>();
+        
+        Set<TaskEntry> correctEntries = new HashSet<>();
         correctEntries.add(toAdd1);
         correctEntries.add(toAdd2);
 
-        assertTrue(correctEntries.containsAll(entryDao.findEntriesOfAType(taskOfEntry, 1)));
-        assertTrue(entryDao.findEntriesOfAType(taskOfEntry, 1).containsAll(correctEntries));
+        Set<TaskEntry> foundEntries = new HashSet<>(entryDao.findEntriesOfAType(taskOfEntry, 1));
+
+        assertEquals(correctEntries, foundEntries);
     }
 
     @Test

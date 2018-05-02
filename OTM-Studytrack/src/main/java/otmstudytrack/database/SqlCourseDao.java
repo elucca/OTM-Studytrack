@@ -21,7 +21,7 @@ public class SqlCourseDao implements CourseDao {
      *
      * @param db the Database object representing the database the dao is
      * connected to
-     * @param taskDao the SqlTaskTypeDao dependency
+     * @param taskDao the TaskTypeDao dependency
      */
     public SqlCourseDao(Database db, TaskTypeDao taskDao) {
         this.db = db;
@@ -189,7 +189,7 @@ public class SqlCourseDao implements CourseDao {
     /**
      * Retrieves the database id of the course of the given name.
      *
-     * @param name
+     * @param name the name of the course
      * @return the SQlite-generated unique integer id of the course
      * @throws SQLException if an invalid SQL statement is created
      */

@@ -22,7 +22,7 @@ public class SqlTaskTypeDao implements TaskTypeDao {
      *
      * @param db the Database object representing the database the dao is
      * connected to
-     * @param taskDao the SqlTaskEntryDao dependency
+     * @param entryDao the TaskEntryDao dependency
      */
     public SqlTaskTypeDao(Database db, TaskEntryDao entryDao) {
         this.db = db;
@@ -121,7 +121,9 @@ public class SqlTaskTypeDao implements TaskTypeDao {
         List<TaskType> foundTasks = new ArrayList<>();
 
         while (tasksRs.next()) {
-            foundTasks.add(new TaskType(tasksRs.getString("name"), course));
+            TaskType foundTask = new TaskType(tasksRs.getString("name"), course);
+            foundTask.addEntries(entryDao.findEntriesOfAType(foundTask, findTaskTypeId(foundTask)));
+            foundTasks.add(foundTask);
         }
         taskStmt.close();
         tasksRs.close();
