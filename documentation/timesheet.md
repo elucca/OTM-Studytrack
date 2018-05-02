@@ -12,8 +12,9 @@
 | 22.4.2018     | 2h 17m        |  Implemented remaining dao tests and fixed related bugs                   |
 | 23.4.2018     | 2h 42m        |  Performed bugfixing and refactoring of database functionality            |
 | 24.4.2018     | 1h 40m        |  Performed bugfixing and testing and made first release                   |
-|Total time:    | 38h 50m       |                                                                           |
 | 26.4.2018     | 5h 22m        |  Implemented new features to UI along and to courses                      |
 | 28.4.2018     | 1h 30m        |  Began creating Javadoc documentation                                     |
 | 29.4.2018     | 3h 45m        |  Worked on more documentation, changed task entry feature                 |
 | 30.4.2018     | 2h 55m        |  Wrote manual and architecture description; implemented new tests         |
+| 02.5.2018     | 6h 52m        |  Performed bugfixing, documentation, refactoring; made second release     |
+| Total time:   | 59h 14m       |                                                                           |
