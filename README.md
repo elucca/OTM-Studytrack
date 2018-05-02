@@ -6,6 +6,8 @@ Note: All user data is stored locally in db/studytrack.db. The folder and databa
 
 ## Documentation
 
+[User manual](https://github.com/elucca/OTM-Studytrack/blob/master/documentation/manual.md)
+
 [Requirements specification](https://github.com/elucca/OTM-Studytrack/blob/master/documentation/software%20requirements%20specification.md)
 
 [Architecture description](https://github.com/elucca/OTM-Studytrack/blob/master/documentation/architecture.md)
@@ -13,6 +15,8 @@ Note: All user data is stored locally in db/studytrack.db. The folder and databa
 [Timesheet](https://github.com/elucca/OTM-Studytrack/blob/master/documentation/timesheet.md)
 
 ## Releases
+
+Week 6 - [v0.2-alpha](https://github.com/elucca/OTM-Studytrack/releases/tag/week6)
 
 Week 5 - [v0.1-alpha](https://github.com/elucca/OTM-Studytrack/releases/tag/week5)
 
@@ -38,6 +42,14 @@ Checkstyle is ran using the below command. Checkstyle follows the criteria defin
 ```
 mvn jxr:jxr checkstyle:checkstyle
 ```
+
+### Javadoc
+
+Javadoc is generated using the command:
+```
+mvn javadoc:javadoc
+```
+The generated Javadocs are located at target/site/apidocs/index.html, which can be opened using a browser.
 
 ### Generating an executable jar package
 
