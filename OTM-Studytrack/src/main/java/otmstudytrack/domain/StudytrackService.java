@@ -169,7 +169,7 @@ public class StudytrackService {
         }
         int idOfTaskType = taskDao.findTaskTypeId(taskOfEntry);
 
-        if (idOfCourse == -1 || idOfTaskType == - 1) {
+        if (idOfCourse == -1 || idOfTaskType == -1) {
             return null;
         }
 
@@ -291,7 +291,8 @@ public class StudytrackService {
      * the time spent on all existing task entries on all course weeks.
      *
      * @param course the name of the course
-     * @return a Duration representation of the time spent on all task entries of the course
+     * @return a Duration representation of the time spent on all task entries
+     * of the course
      * @throws SQLException if a database error occurred
      */
     public Duration getTimeSpentOnCourse(String course) throws SQLException {
@@ -310,7 +311,7 @@ public class StudytrackService {
 
     /**
      * Returns all task types of the course with the given name.
-     * 
+     *
      * @param name the name of the course
      * @return a list containing all task types of the given course
      * @throws SQLException if a database error occurred
@@ -326,7 +327,7 @@ public class StudytrackService {
 
     /**
      * Permanently removes all data from the database.
-     * 
+     *
      * @throws SQLException if a database error occurred
      */
     public void removeAllData() throws SQLException {
