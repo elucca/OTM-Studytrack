@@ -1,8 +1,6 @@
 package otmstudytrack.main;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.Scanner;
 import otmstudytrack.domain.StudytrackService;

@@ -1,9 +1,7 @@
 package otmstudytrack.domain;
 
 import otmstudytrack.database.*;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
