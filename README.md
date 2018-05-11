@@ -18,6 +18,8 @@ Note: All user data is stored locally in db/studytrack.db. The folder and databa
 
 ## Releases
 
+Final - [v1.0](https://github.com/elucca/OTM-Studytrack/releases/tag/loppupalautus)
+
 Week 6 - [v0.2-alpha](https://github.com/elucca/OTM-Studytrack/releases/tag/week6)
 
 Week 5 - [v0.1-alpha](https://github.com/elucca/OTM-Studytrack/releases/tag/week5)
