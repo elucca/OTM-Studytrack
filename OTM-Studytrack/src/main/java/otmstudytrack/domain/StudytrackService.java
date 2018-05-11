@@ -90,9 +90,27 @@ public class StudytrackService {
         entryDao.addTaskEntry(new TaskEntry(date, courseWeek, foundTaskType, fullDuration), foundTaskId);
         return true;
     }
+    
+    public TaskEntry getTaskEntry(String course, String taskType, int courseWeek) throws SQLException {
+        Course courseOfEntry = courseDao.findCourseByName(course);
+        if (courseOfEntry == null) {
+            return null;
+        }        
+        int idOfCourse = courseDao.findCourseID(course);
+        TaskType taskOfEntry = taskDao.findTaskType(taskType, courseOfEntry, idOfCourse);
+        if (taskOfEntry == null) {
+            return null;
+        }
+        int idOfTaskType = taskDao.findTaskTypeId(taskOfEntry);
+        
+        if (idOfCourse == -1 || idOfTaskType == - 1) {
+            return null;
+        }
+        
+        return entryDao.findTaskEntry(taskOfEntry, idOfTaskType, courseWeek);
+    }
 
     public boolean removeTaskEntry(int courseWeek, String task, String course) throws SQLException {
-        //This requires rework once TaskEntry is properly fixed to be weekly
         Course foundCourse = courseDao.findCourseByName(course);
         if (foundCourse == null) {
             return false;
@@ -105,7 +123,6 @@ public class StudytrackService {
         }
         int foundTaskId = taskDao.findTaskTypeId(foundTaskType);
 
-        //Doesn't properly check if removal was successful
         entryDao.removeTaskEntry(new TaskEntry(new Date(), courseWeek, foundTaskType, Duration.ZERO), foundTaskId, courseWeek);
         return true;
     }

@@ -297,6 +297,8 @@ public class TextUI {
         Course foundCourse = service.getCourse(courseName);
         if (foundCourse.isActive()) {
             System.out.println("Course is already active. No changes made.");
+            System.out.println("");
+            return;
         }
 
         service.setCourseActive(courseName, true);

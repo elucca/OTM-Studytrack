@@ -27,7 +27,6 @@ public class SqlCourseDaoTest {
         dbDir.mkdir();
         db = new Database("src" + File.separator + "test" + File.separator + "java" + File.separator + "db" + File.separator + "test.db");
         entryDao = new SqlTaskEntryDao(db);
-        entryDao = new SqlTaskEntryDao(db);
         taskDao = new SqlTaskTypeDao(db, entryDao);
         courseDao = new SqlCourseDao(db, taskDao);
     }
