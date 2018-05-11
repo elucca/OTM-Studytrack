@@ -28,6 +28,6 @@ Data persistence is implemented using an Sqlite3 database. Interacting with the 
 
 ## Control flow example
 
-The following sequence diagram depicts the control flow in the case of the user adding a course which does not yet exist in the database.
+The following sequence diagram depicts the control flow in the case of the user adding a course which does not yet exist in the database. This is a representative example of the manner in which the user layer, domain layer and data access layers interact.
 
 ![Adding a course - sequence diagram](misc/addcourseseq.png) 
