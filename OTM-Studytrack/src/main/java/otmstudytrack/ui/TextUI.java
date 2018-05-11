@@ -31,15 +31,8 @@ public class TextUI {
     private void handleInput() throws SQLException {
         while (true) {
             try {
-                int input = -1;
-                try {
-                    input = Integer.parseInt(reader.nextLine());
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid input. Please try again.");
-                    System.out.println("");
-                    continue;
-                }
-
+                int input = handleIntegerInput();
+                
                 System.out.println("");
 
                 if (input == 1) {
@@ -163,6 +156,8 @@ public class TextUI {
 
         if (service.addTaskType(taskName, courseName) == false) {
             System.out.println("Course not found: Task not added.");
+            System.out.println("");
+            return;
         }
 
         System.out.println("");
@@ -174,21 +169,25 @@ public class TextUI {
         Course foundCourse = service.getCourse(courseName);
         if (foundCourse == null) {
             System.out.println("Course not found: Entry not added.");
+            System.out.println("");
+            return;
         }
 
         System.out.print("Input the name of the task the entry is related to: ");
         String taskName = reader.nextLine();
         if (!foundCourse.getTaskTypes().contains(new TaskType(taskName, foundCourse))) {
             System.out.println("Task not found: Entry not added.");
+            System.out.println("");
+            return;
         }
 
         System.out.print("Input the course week the entry is related to: ");
-        int courseWeek = Integer.parseInt(reader.nextLine());
+        int courseWeek = handleIntegerInput();
 
         System.out.print("Specify hours spent: ");
-        int hours = Integer.parseInt(reader.nextLine());
+        int hours = handleIntegerInput();
         System.out.print("Specify minutes spent: ");
-        int minutes = Integer.parseInt(reader.nextLine());
+        int minutes = handleIntegerInput();
 
         service.addTaskEntry(courseWeek, taskName, courseName, hours, minutes);
 
@@ -235,7 +234,7 @@ public class TextUI {
             String taskName = reader.nextLine();
             System.out.print("Input the course week the entry is related to: ");
             //Add check that it actually is an int, currently crashes if not
-            int week = Integer.parseInt(reader.nextLine());
+            int week = handleIntegerInput();
             service.removeTaskEntry(week, taskName, courseName);
         } else {
             System.out.println("");
@@ -344,6 +343,19 @@ public class TextUI {
 
             System.out.print("Please input 'y' or 'n'.");
             System.out.println("");
+        }
+    }
+
+    private int handleIntegerInput() {
+        while (true) {
+            try {
+                int parsedInput = Integer.parseInt(reader.nextLine());
+                return parsedInput;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please try again.");
+                System.out.println("");
+                continue;
+            }
         }
     }
 
