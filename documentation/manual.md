@@ -27,6 +27,6 @@ The user can add three types of data: Courses, task types and task entries. A ta
 
 Duplicate data is handled as follows: An attempt to add a duplicate course will result in no changes, as will an attempt to add a duplicate task type to a given course. For task entries, only one entry per week is allowed, but the user is free to log time spent to an entry as many times as they like. If an entry for a given task and week already exists, the newly logged time is added to it.
 
-There are several options for viewing the data previously input. These options are likely to be expanded in future versions.
+There are several options for viewing the data previously input. The user can view their courses, tasks, entries and the total time spent on a course.
 
 The interface allows for removing courses, task types and task entries. When removing a course, all of its task types and the entries related to those task types are deleted. As the user may wish to remove a course from their list of active courses,the "Remove course from active courses" feature does not permanently delete any data. Courses may be reactivated and permanently deleted using features under the "Administrative functions" section. There is also a feature for permanently deleting all user data. Confirmation is requested from the user for any feature which permanently deletes data.
