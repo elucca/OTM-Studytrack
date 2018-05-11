@@ -12,6 +12,8 @@ Note: All user data is stored locally in db/studytrack.db. The folder and databa
 
 [Architecture description](https://github.com/elucca/OTM-Studytrack/blob/master/documentation/architecture.md)
 
+[Testing document](https://github.com/elucca/OTM-Studytrack/blob/master/documentation/Testing%20document.md)
+
 [Timesheet](https://github.com/elucca/OTM-Studytrack/blob/master/documentation/timesheet.md)
 
 ## Releases
