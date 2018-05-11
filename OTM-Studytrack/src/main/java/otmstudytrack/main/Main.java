@@ -11,7 +11,7 @@ import otmstudytrack.database.*;
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException, UnsupportedEncodingException, URISyntaxException {
+    public static void main(String[] args) {
         //Initializes the program
 
         //Init db
@@ -19,18 +19,22 @@ public class Main {
         File dbDir = new File("db");
         dbDir.mkdir();
 
-        Database db = new Database("db" + File.separator + "studytrack.db");
-        TaskEntryDao entryDao = new SqlTaskEntryDao(db);
-        TaskTypeDao taskDao = new SqlTaskTypeDao(db, entryDao);
-        CourseDao courseDao = new SqlCourseDao(db, taskDao);
+        try {
+            Database db = new Database("db" + File.separator + "studytrack.db");
+            TaskEntryDao entryDao = new SqlTaskEntryDao(db);
+            TaskTypeDao taskDao = new SqlTaskTypeDao(db, entryDao);
+            CourseDao courseDao = new SqlCourseDao(db, taskDao);
 
-        //Init logic
-        StudytrackService service = new StudytrackService(db, courseDao, taskDao, entryDao);
+            //Init logic
+            StudytrackService service = new StudytrackService(db, courseDao, taskDao, entryDao);
 
-        //Init UI
-        Scanner reader = new Scanner(System.in);
-        TextUI textUI = new TextUI(reader, service);
-        textUI.start();
+            //Init UI
+            Scanner reader = new Scanner(System.in);
+            TextUI textUI = new TextUI(reader, service);
+            textUI.start();
+        } catch (SQLException sqlException) {
+            System.out.println("Error initializing database. Exiting program.");
+        }
     }
 
 }

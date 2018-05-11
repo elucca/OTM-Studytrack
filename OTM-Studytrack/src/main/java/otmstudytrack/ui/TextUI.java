@@ -18,9 +18,14 @@ public class TextUI {
         this.service = service;
     }
 
-    public void start() throws SQLException {
+    public void start() {
         printOptions();
-        handleInput();
+        
+        try {
+            handleInput();
+        } catch (SQLException e) {
+            handleDatabaseException(e);
+        }
     }
 
     private void handleInput() throws SQLException {
@@ -298,6 +303,10 @@ public class TextUI {
             System.out.print("Please input 'y' or 'n'.");
             System.out.println("");
         }
+    }
+
+    private void handleDatabaseException(SQLException e) {
+        System.out.println("A database error has occurred. No data has been altered.");
     }
 
 }
