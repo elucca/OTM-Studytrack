@@ -1,4 +1,4 @@
-# Test document
+# Testing document
 
 The program has been tested through both automated unit tests and manual testing by running the program through all typical use cases.
 
