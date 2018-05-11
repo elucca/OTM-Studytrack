@@ -17,4 +17,6 @@
 | 29.4.2018     | 3h 45m        |  Worked on more documentation, changed task entry feature                 |
 | 30.4.2018     | 2h 55m        |  Wrote manual and architecture description; implemented new tests         |
 | 02.5.2018     | 6h 52m        |  Performed bugfixing, documentation, refactoring; made second release     |
-| Total time:   | 59h 14m       |                                                                           |
+| 10.5.2018     | 3h 20m        |  Expanded tests and performed bugfixing                                   |
+| 11.5.2018     | 5h 02m        |  Performed final testing, documentation and release                       |
+| Total time:   | 66h 62m       |                                                                           |
