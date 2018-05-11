@@ -8,7 +8,7 @@ A hybrid, bottom-up form of testing has been used. Although constructed in the m
 
 ### DAO classes
 
-Dao classes have been tested by providing a clean slate database file for each test. The database is emptied between each test.
+Dao classes have been tested by providing a clean slate database file for each test. The test database is strictly separate from the user database. The database is emptied between each test.
 
 ### Program logic
 
